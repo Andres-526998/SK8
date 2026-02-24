@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Galería | TOPSPOT Santa Marta</title>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Bebas+Neue&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 
 :root{--cyan:#00FFCC;--bg:#0a0a0a;--card:#111;--card2:#181818;--text:#fff;--muted:#888;}
@@ -432,13 +431,13 @@ footer{background:#080808;border-top:1px solid rgba(0,255,204,.15);padding:3rem 
 
 
 <nav>
-  <div class="nav-logo">TOPSPOT</div>
+  <a href="index.html" style="text-decoration:none;"><div class="nav-logo">TOPSPOT</div></a>
   <ul class="nav-links">
-    <li><a href="/productos/tablas.html">Tablas</a></li>
-    <li><a href="/productos/trucks.html">Trucks</a></li>
-    <li><a href="/productos/ropa.html">Ropa</a></li>
-    <li><a href="/productos/accesorios.html">Accesorios</a></li>
-    <li><a href="/galeria.html">Galería</a></li>
+    <li><a href="productos/tablas.html">Tablas</a></li>
+    <li><a href="productos/trucks.html">Trucks</a></li>
+    <li><a href="productos/ropa.html">Ropa</a></li>
+    <li><a href="productos/accesorios.html">Accesorios</a></li>
+    <li><a href="galeria.html">Galería</a></li>
   </ul>
   <div class="nav-actions">
     <button class="btn-login" onclick="openModal('login-modal')">Iniciar Sesión</button>
@@ -484,7 +483,7 @@ footer{background:#080808;border-top:1px solid rgba(0,255,204,.15);padding:3rem 
         <a href="#" onclick="showAdminLogin()" style="color:rgba(0,255,204,.3);font-size:.75rem;text-decoration:none;letter-spacing:1px;">⚙ Admin</a>
       </p>
     </div>
-    <div class="footer-col"><h4>Productos</h4><ul><li><a href="/productos/tablas.html">Tablas</a></li><li><a href="/productos/trucks.html">Trucks</a></li><li><a href="/productos/ruedas.html">Ruedas</a></li><li><a href="/productos/ropa.html">Ropa</a></li><li><a href="/productos/accesorios.html">Accesorios</a></li></ul></div>
+    <div class="footer-col"><h4>Productos</h4><ul><li><a href="productos/tablas.html">Tablas</a></li><li><a href="productos/trucks.html">Trucks</a></li><li><a href="productos/ruedas.html">Ruedas</a></li><li><a href="productos/ropa.html">Ropa</a></li><li><a href="productos/accesorios.html">Accesorios</a></li></ul></div>
     <div class="footer-col"><h4>Tienda</h4><ul><li><a href="#">Sobre nosotros</a></li><li><a href="#">Envíos</a></li><li><a href="#">Devoluciones</a></li><li><a href="#">Contacto</a></li></ul></div>
     <div class="footer-col"><h4>Métodos de pago</h4><p style="color:var(--muted);font-size:.85rem;line-height:1.9;">💵 Efectivo<br>💳 Tarjeta<br>🏦 Transferencia CLABE</p></div>
   </div>
@@ -584,13 +583,108 @@ footer{background:#080808;border-top:1px solid rgba(0,255,204,.15);padding:3rem 
 </div>
 
 <script>
+
+// ══ CLIENTE SUPABASE NATIVO (sin SDK) ══
+const SUPABASE_URL = 'https://kvialqdfvgtokvfmousm.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_NhgcHDR4VUSmlff3CuBASQ_OEPMi5ZH';
+
+var _supabase = {
+  from: function(table) {
+    var base = SUPABASE_URL + '/rest/v1/' + table;
+    var headers = {
+      'apikey': SUPABASE_KEY,
+      'Authorization': 'Bearer ' + SUPABASE_KEY,
+      'Content-Type': 'application/json',
+      'Prefer': 'return=representation'
+    };
+    var _filters = [];
+    var _order = '';
+    var _select = '*';
+
+    var chain = {
+      select: function(cols) { _select = cols || '*'; return chain; },
+      eq: function(col, val) { _filters.push(col + '=eq.' + encodeURIComponent(val)); return chain; },
+      order: function(col, opts) { _order = '&order=' + col + (opts && opts.ascending === false ? '.desc' : '.asc'); return chain; },
+      single: function() {
+        var url = base + '?select=' + _select + (_filters.length ? '&' + _filters.join('&') : '') + _order;
+        return fetch(url, { headers: Object.assign({}, headers, { 'Accept': 'application/vnd.pgrst.object+json' }) })
+          .then(function(r) { return r.json().then(function(d) { return r.ok ? { data: d, error: null } : { data: null, error: d }; }); })
+          .catch(function(e) { return { data: null, error: e }; });
+      },
+      then: function(cb) {
+        var url = base + '?select=' + _select + (_filters.length ? '&' + _filters.join('&') : '') + _order;
+        return fetch(url, { headers: headers })
+          .then(function(r) { return r.json().then(function(d) { return r.ok ? { data: d, error: null } : { data: null, error: d }; }); })
+          .then(cb)
+          .catch(function(e) { cb({ data: null, error: e }); });
+      }
+    };
+
+    // Make it awaitable
+    chain[Symbol.for('nodejs.rejection')] = null;
+    var makePromise = function() {
+      var url = base + '?select=' + _select + (_filters.length ? '&' + _filters.join('&') : '') + _order;
+      return fetch(url, { headers: headers })
+        .then(function(r) { return r.json().then(function(d) { return r.ok ? { data: d, error: null } : { data: null, error: d }; }); })
+        .catch(function(e) { return { data: null, error: e }; });
+    };
+
+    // Patch: make chain thenable so await works
+    chain.then = function(resolve, reject) { return makePromise().then(resolve, reject); };
+    chain.catch = function(reject) { return makePromise().catch(reject); };
+
+    return chain;
+  },
+
+  insert: function(table, rows) {
+    return fetch(SUPABASE_URL + '/rest/v1/' + table, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=representation'
+      },
+      body: JSON.stringify(Array.isArray(rows) ? rows : [rows])
+    }).then(function(r) { return r.json().then(function(d) { return r.ok ? { data: d, error: null } : { data: null, error: d }; }); })
+      .catch(function(e) { return { data: null, error: e }; });
+  },
+
+  update: function(table, payload, filters) {
+    var url = SUPABASE_URL + '/rest/v1/' + table + '?' + filters;
+    return fetch(url, {
+      method: 'PATCH',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=representation'
+      },
+      body: JSON.stringify(payload)
+    }).then(function(r) { return r.json().then(function(d) { return r.ok ? { data: d, error: null } : { data: null, error: d }; }); })
+      .catch(function(e) { return { data: null, error: e }; });
+  },
+
+  delete: function(table, filters) {
+    var url = SUPABASE_URL + '/rest/v1/' + table + '?' + filters;
+    return fetch(url, {
+      method: 'DELETE',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_KEY,
+        'Content-Type': 'application/json'
+      }
+    }).then(function(r) { return r.ok ? { data: null, error: null } : r.json().then(function(d) { return { data: null, error: d }; }); })
+      .catch(function(e) { return { data: null, error: e }; });
+  }
+};
+
+
 // ══════════════════════════════════════════════════════
 //  CONFIGURACIÓN SUPABASE
 //  👇 Reemplaza con tus datos de Supabase
 // ══════════════════════════════════════════════════════
-const SUPABASE_URL = 'https://kvialqdfvgtokvfmousm.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_NhgcHDR4VUSmlff3CuBASQ_OEPMi5ZH';
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
 
 // ── CREDENCIALES ADMIN (cambia la contraseña) ──
 var ADMIN_USER = 'admin';
@@ -611,7 +705,7 @@ var allProducts = [];
 
 async function loadProducts() {
   try {
-    var { data, error } = await supabase
+    var { data, error } = await _supabase
       .from('productos')
       .select('*')
       .eq('activo', true)
@@ -762,7 +856,7 @@ function showAdminTab(tabId) {
 // ── CARGAR TABLA ADMIN ──
 async function loadAdminProducts() {
   try {
-    var { data, error } = await supabase.from('productos').select('*').order('created_at', { ascending: false });
+    var { data, error } = await _supabase.from('productos').select('*').order('created_at', { ascending: false });
     if (error) throw error;
     renderAdminTable(data || []);
     updateStats(data || []);
@@ -816,7 +910,7 @@ function renderAdminTable(prods) {
 function editProduct(id) {
   var all = allProducts.length ? allProducts : [];
   // también buscar en el DOM actual
-  supabase.from('productos').select('*').eq('id', id).single().then(function(result) {
+  _supabase.from('productos').select('*').eq('id', id).single().then(function(result) {
     var p = result.data;
     if (!p) return;
     editingId = id;
@@ -860,9 +954,9 @@ async function saveProduct() {
   try {
     var result;
     if (editingId) {
-      result = await supabase.from('productos').update(payload).eq('id', editingId);
+      result = await _supabase.update('productos', payload, 'id=eq.' + editingId);
     } else {
-      result = await supabase.from('productos').insert([payload]);
+      result = await _supabase.insert('productos', [payload]);
     }
     if (result.error) throw result.error;
     showFormMsg('✅ Producto guardado correctamente', 'var(--cyan)');
@@ -888,7 +982,7 @@ async function saveProduct() {
 
 async function toggleProduct(id, current) {
   try {
-    await supabase.from('productos').update({ activo: !current }).eq('id', id);
+    await _supabase.update('productos', { activo: !current }, 'id=eq.' + id);
     loadAdminProducts();
     loadProducts();
   } catch(e) {
@@ -902,7 +996,7 @@ async function toggleProduct(id, current) {
 async function deleteProduct(id) {
   if (!confirm('¿Seguro que quieres eliminar este producto?')) return;
   try {
-    await supabase.from('productos').delete().eq('id', id);
+    await _supabase.delete('productos', 'id=eq.' + id);
     loadAdminProducts();
     loadProducts();
     showToast('🗑 Producto eliminado');
@@ -1164,8 +1258,7 @@ function showToast(msg) {
 }
 
 // INICIO
-loadProducts();
-updateCartDisplay();
+window.addEventListener("load", function() { loadProducts(); updateCartDisplay(); });
 </script>
 
 <script>
@@ -1174,9 +1267,7 @@ updateCartDisplay();
 //  CONFIGURACIÓN SUPABASE
 //  👇 Reemplaza con tus datos de Supabase
 // ══════════════════════════════════════════════════════
-const SUPABASE_URL = 'https://kvialqdfvgtokvfmousm.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_NhgcHDR4VUSmlff3CuBASQ_OEPMi5ZH';
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
 
 // ── CREDENCIALES ADMIN (cambia la contraseña) ──
 var ADMIN_USER = 'admin';
@@ -1197,7 +1288,7 @@ var allProducts = [];
 
 async function loadProducts() {
   try {
-    var { data, error } = await supabase
+    var { data, error } = await _supabase
       .from('productos')
       .select('*')
       .eq('activo', true)
@@ -1348,7 +1439,7 @@ function showAdminTab(tabId) {
 // ── CARGAR TABLA ADMIN ──
 async function loadAdminProducts() {
   try {
-    var { data, error } = await supabase.from('productos').select('*').order('created_at', { ascending: false });
+    var { data, error } = await _supabase.from('productos').select('*').order('created_at', { ascending: false });
     if (error) throw error;
     renderAdminTable(data || []);
     updateStats(data || []);
@@ -1402,7 +1493,7 @@ function renderAdminTable(prods) {
 function editProduct(id) {
   var all = allProducts.length ? allProducts : [];
   // también buscar en el DOM actual
-  supabase.from('productos').select('*').eq('id', id).single().then(function(result) {
+  _supabase.from('productos').select('*').eq('id', id).single().then(function(result) {
     var p = result.data;
     if (!p) return;
     editingId = id;
@@ -1446,9 +1537,9 @@ async function saveProduct() {
   try {
     var result;
     if (editingId) {
-      result = await supabase.from('productos').update(payload).eq('id', editingId);
+      result = await _supabase.update('productos', payload, 'id=eq.' + editingId);
     } else {
-      result = await supabase.from('productos').insert([payload]);
+      result = await _supabase.insert('productos', [payload]);
     }
     if (result.error) throw result.error;
     showFormMsg('✅ Producto guardado correctamente', 'var(--cyan)');
@@ -1474,7 +1565,7 @@ async function saveProduct() {
 
 async function toggleProduct(id, current) {
   try {
-    await supabase.from('productos').update({ activo: !current }).eq('id', id);
+    await _supabase.update('productos', { activo: !current }, 'id=eq.' + id);
     loadAdminProducts();
     loadProducts();
   } catch(e) {
@@ -1488,7 +1579,7 @@ async function toggleProduct(id, current) {
 async function deleteProduct(id) {
   if (!confirm('¿Seguro que quieres eliminar este producto?')) return;
   try {
-    await supabase.from('productos').delete().eq('id', id);
+    await _supabase.delete('productos', 'id=eq.' + id);
     loadAdminProducts();
     loadProducts();
     showToast('🗑 Producto eliminado');
@@ -1750,14 +1841,12 @@ function showToast(msg) {
 }
 
 // INICIO
-loadProducts();
-updateCartDisplay();
+window.addEventListener("load", function() { loadProducts(); updateCartDisplay(); });
 
 
 async function loadProducts() { updateCartDisplay(); }
 
-loadProducts();
-updateCartDisplay();
+window.addEventListener("load", function() { loadProducts(); updateCartDisplay(); });
 </script>
 </body>
 </html>
