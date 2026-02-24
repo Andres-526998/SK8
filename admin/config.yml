@@ -1,0 +1,134 @@
+backend:
+  name: github
+  repo: Andres-526998/SK8
+  branch: main                        # o master, según tu rama principal
+
+media_folder: "imagenes"             # Carpeta donde se guardarán las fotos que subas
+public_folder: "/imagenes"
+
+locale: "es"
+
+collections:
+
+  # ── TABLAS ──────────────────────────────────────────────
+  - name: "tablas"
+    label: "🛹 Tablas"
+    label_singular: "Tabla"
+    folder: "_productos/tablas"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Nombre del producto", name: "nombre", widget: "string" }
+      - { label: "Precio ($)", name: "precio", widget: "number", value_type: "int" }
+      - { label: "Precio anterior ($) — opcional", name: "precio_anterior", widget: "number", value_type: "int", required: false }
+      - { label: "Descripción", name: "descripcion", widget: "text" }
+      - { label: "Imagen", name: "imagen", widget: "image", required: false }
+      - label: "Etiqueta"
+        name: "etiqueta"
+        widget: "select"
+        required: false
+        options: ["NUEVO", "POPULAR", "EXCLUSIVO", "DROP SEMANA", "TOP VENTAS"]
+      - { label: "Activo (visible en la tienda)", name: "activo", widget: "boolean", default: true }
+
+  # ── TRUCKS ──────────────────────────────────────────────
+  - name: "trucks"
+    label: "⚙️ Trucks"
+    label_singular: "Truck"
+    folder: "_productos/trucks"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Nombre del producto", name: "nombre", widget: "string" }
+      - { label: "Precio ($)", name: "precio", widget: "number", value_type: "int" }
+      - { label: "Descripción", name: "descripcion", widget: "text" }
+      - { label: "Imagen", name: "imagen", widget: "image", required: false }
+      - label: "Etiqueta"
+        name: "etiqueta"
+        widget: "select"
+        required: false
+        options: ["NUEVO", "POPULAR", "TOP VENTAS"]
+      - { label: "Activo", name: "activo", widget: "boolean", default: true }
+
+  # ── RUEDAS ──────────────────────────────────────────────
+  - name: "ruedas"
+    label: "⭕ Ruedas"
+    label_singular: "Rueda"
+    folder: "_productos/ruedas"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Nombre del producto", name: "nombre", widget: "string" }
+      - { label: "Precio ($)", name: "precio", widget: "number", value_type: "int" }
+      - { label: "Descripción", name: "descripcion", widget: "text" }
+      - { label: "Imagen", name: "imagen", widget: "image", required: false }
+      - label: "Etiqueta"
+        name: "etiqueta"
+        widget: "select"
+        required: false
+        options: ["NUEVO", "POPULAR", "TOP VENTAS"]
+      - { label: "Activo", name: "activo", widget: "boolean", default: true }
+
+  # ── ROPA ────────────────────────────────────────────────
+  - name: "ropa"
+    label: "👕 Ropa"
+    label_singular: "Prenda"
+    folder: "_productos/ropa"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Nombre del producto", name: "nombre", widget: "string" }
+      - { label: "Precio ($)", name: "precio", widget: "number", value_type: "int" }
+      - { label: "Descripción", name: "descripcion", widget: "text" }
+      - { label: "Imagen", name: "imagen", widget: "image", required: false }
+      - label: "Tallas disponibles"
+        name: "tallas"
+        widget: "select"
+        multiple: true
+        options: ["XS", "S", "M", "L", "XL", "XXL", "28", "30", "32", "34", "36", "38", "39", "40", "41", "42", "43", "44", "45", "46", "Única", "S/M", "L/XL"]
+      - label: "Etiqueta"
+        name: "etiqueta"
+        widget: "select"
+        required: false
+        options: ["NUEVO", "POPULAR", "EXCLUSIVO"]
+      - { label: "Activo", name: "activo", widget: "boolean", default: true }
+
+  # ── ACCESORIOS ──────────────────────────────────────────
+  - name: "accesorios"
+    label: "🔩 Accesorios"
+    label_singular: "Accesorio"
+    folder: "_productos/accesorios"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Nombre del producto", name: "nombre", widget: "string" }
+      - { label: "Precio ($)", name: "precio", widget: "number", value_type: "int" }
+      - { label: "Descripción", name: "descripcion", widget: "text" }
+      - { label: "Imagen", name: "imagen", widget: "image", required: false }
+      - label: "Etiqueta"
+        name: "etiqueta"
+        widget: "select"
+        required: false
+        options: ["NUEVO", "POPULAR"]
+      - { label: "Activo", name: "activo", widget: "boolean", default: true }
+
+  # ── CONFIGURACIÓN GENERAL ────────────────────────────────
+  - name: "configuracion"
+    label: "⚙️ Configuración de la Tienda"
+    files:
+      - label: "Datos generales"
+        name: "general"
+        file: "_config/general.yml"
+        fields:
+          - { label: "Nombre de la tienda", name: "nombre_tienda", widget: "string", default: "SK8" }
+          - { label: "Dirección", name: "direccion", widget: "string" }
+          - { label: "Teléfono WhatsApp (con código de país)", name: "whatsapp", widget: "string", default: "5618426883" }
+          - { label: "CLABE interbancaria", name: "clabe", widget: "string" }
+          - { label: "Nombre del beneficiario", name: "beneficiario", widget: "string" }
+          - { label: "Banco", name: "banco", widget: "string" }
+          - { label: "Texto del hero (título)", name: "hero_titulo", widget: "string" }
+          - { label: "Texto del hero (subtítulo)", name: "hero_subtitulo", widget: "string" }
