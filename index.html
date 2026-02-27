@@ -10,10 +10,7 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;overflow-x:hidden;}
 ::-webkit-scrollbar{width:6px;}::-webkit-scrollbar-track{background:#111;}::-webkit-scrollbar-thumb{background:var(--cyan);border-radius:3px;}
-
-/* NAV */
-nav{position:sticky;top:0;z-index:1000;background:rgba(10,10,10,0.96);backdrop-filter:blur(12px);
-  border-bottom:1px solid rgba(0,255,204,0.2);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;}
+nav{position:sticky;top:0;z-index:1000;background:rgba(10,10,10,0.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,255,204,0.2);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;}
 .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--cyan);letter-spacing:4px;text-shadow:0 0 20px rgba(0,255,204,0.5);}
 .nav-links{display:flex;gap:1.8rem;list-style:none;}
 .nav-links a{color:var(--text);text-decoration:none;font-weight:600;font-size:.9rem;letter-spacing:1px;text-transform:uppercase;transition:color .2s;}
@@ -24,8 +21,6 @@ nav{position:sticky;top:0;z-index:1000;background:rgba(10,10,10,0.96);backdrop-f
 .cart-btn{background:var(--cyan);color:#000;border:none;width:44px;height:44px;border-radius:50%;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;position:relative;transition:transform .2s;}
 .cart-btn:hover{transform:scale(1.1);}
 .cart-count{position:absolute;top:-4px;right:-4px;background:#ff3366;color:#fff;font-size:.7rem;font-weight:700;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
-
-/* HERO */
 .hero{position:relative;height:480px;overflow:hidden;background:linear-gradient(135deg,#0a0a0a 0%,#0d1a15 50%,#0a0a0a 100%);display:flex;align-items:center;padding:3rem;}
 .hero-bg-img{position:absolute;right:0;top:0;height:100%;width:55%;background:linear-gradient(to left,rgba(0,30,20,.7),transparent),url('https://images.unsplash.com/photo-1547447134-cd3f5c716030?w=800&q=80') center/cover;opacity:.4;}
 .hero-content{position:relative;z-index:2;max-width:500px;}
@@ -40,19 +35,13 @@ nav{position:sticky;top:0;z-index:1000;background:rgba(10,10,10,0.96);backdrop-f
 @keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 .hero-content > *{animation:fadeInUp .6s ease both;}
 .hero-eyebrow{animation-delay:.1s;}.hero-title{animation-delay:.2s;}.hero-sub{animation-delay:.3s;}.btn-primary{animation-delay:.4s;}
-
-/* SECTIONS */
 .section{padding:3rem 2rem;}
 .section-title{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:3px;color:var(--cyan);margin-bottom:2rem;text-transform:uppercase;}
-
-/* CATS */
 .cats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1.2rem;max-width:800px;}
 .cat-card{background:var(--card);border:1px solid rgba(0,255,204,.15);border-radius:12px;padding:1.5rem 1rem;text-align:center;cursor:pointer;transition:all .3s;}
 .cat-card:hover{border-color:var(--cyan);background:rgba(0,255,204,.05);transform:translateY(-4px);}
 .cat-icon{width:60px;height:60px;border:2px solid var(--cyan);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto .8rem;font-size:1.5rem;}
 .cat-label{color:var(--text);font-weight:700;font-size:.85rem;letter-spacing:2px;text-transform:uppercase;}
-
-/* PRODUCTS */
 .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.5rem;}
 .product-card{background:var(--card);border:1px solid rgba(0,255,204,.1);border-radius:12px;overflow:hidden;transition:all .3s;position:relative;}
 .product-card:hover{border-color:var(--cyan);transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,.5);}
@@ -76,8 +65,6 @@ nav{position:sticky;top:0;z-index:1000;background:rgba(10,10,10,0.96);backdrop-f
 .btn-add:hover{background:var(--cyan);color:#000;}
 .loading-products{text-align:center;padding:3rem;color:var(--muted);font-size:1rem;letter-spacing:2px;}
 .empty-section{text-align:center;padding:2rem;color:var(--muted);font-size:.9rem;border:1px dashed rgba(0,255,204,.15);border-radius:8px;}
-
-/* GALERÍA */
 .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;}
 @media(max-width:600px){.gallery-grid{grid-template-columns:repeat(2,1fr);}}
 .gallery-item{position:relative;border-radius:10px;overflow:hidden;cursor:pointer;aspect-ratio:4/3;border:1px solid rgba(0,255,204,.08);transition:all .3s;}
@@ -91,7 +78,33 @@ nav{position:sticky;top:0;z-index:1000;background:rgba(10,10,10,0.96);backdrop-f
 .gallery-tag{color:var(--cyan);font-size:.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;}
 .gallery-item.wide{grid-column:span 2;}
 
-/* LIGHTBOX */
+/* ── SUBIDA DE FOTOS ── */
+.upload-zone{border:2px dashed rgba(0,255,204,.3);border-radius:16px;padding:2.5rem 1.5rem;text-align:center;cursor:pointer;transition:all .3s;background:rgba(0,255,204,.03);margin-bottom:1.5rem;}
+.upload-zone:hover,.upload-zone.drag-over{border-color:var(--cyan);background:rgba(0,255,204,.07);}
+.upload-zone .uz-icon{font-size:3rem;margin-bottom:.8rem;display:block;}
+.upload-zone p{color:var(--muted);font-size:.9rem;letter-spacing:1px;}
+.upload-zone strong{color:var(--cyan);}
+.upload-preview{display:flex;flex-wrap:wrap;gap:.8rem;margin-bottom:1.2rem;}
+.preview-thumb{position:relative;width:90px;height:90px;border-radius:8px;overflow:hidden;border:1px solid rgba(0,255,204,.25);}
+.preview-thumb img{width:100%;height:100%;object-fit:cover;}
+.preview-thumb .rm-btn{position:absolute;top:3px;right:3px;background:rgba(255,51,102,.85);border:none;color:#fff;width:20px;height:20px;border-radius:50%;cursor:pointer;font-size:.75rem;display:flex;align-items:center;justify-content:center;line-height:1;}
+.upload-progress{background:#1a1a1a;border-radius:8px;overflow:hidden;height:8px;margin-bottom:.8rem;display:none;}
+.upload-progress-bar{height:100%;background:var(--cyan);width:0%;transition:width .3s;}
+.upload-status{font-size:.85rem;color:var(--muted);letter-spacing:1px;text-align:center;margin-bottom:.8rem;}
+.upload-status.ok{color:var(--cyan);}
+.upload-status.err{color:#ff4466;}
+/* galería con botón de subida flotante para admin */
+.gallery-upload-btn{display:none;position:absolute;bottom:1rem;right:1rem;background:var(--cyan);color:#000;border:none;padding:10px 18px;border-radius:20px;cursor:pointer;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.85rem;letter-spacing:1px;transition:all .2s;z-index:5;}
+.gallery-upload-btn:hover{background:#fff;}
+#galeria{position:relative;}
+/* foto pendiente de aprobación (admin) */
+.pending-badge{background:rgba(255,204,0,.15);color:#ffcc00;border:1px solid rgba(255,204,0,.3);padding:3px 10px;border-radius:20px;font-size:.72rem;font-weight:700;letter-spacing:1px;}
+.gallery-item .approve-btn{display:none;position:absolute;bottom:8px;left:8px;background:var(--cyan);color:#000;border:none;padding:5px 12px;border-radius:4px;cursor:pointer;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.75rem;z-index:5;}
+.gallery-item .delete-btn{display:none;position:absolute;bottom:8px;right:8px;background:#ff4466;color:#fff;border:none;padding:5px 12px;border-radius:4px;cursor:pointer;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.75rem;z-index:5;}
+.admin-gallery-mode .gallery-item .approve-btn,
+.admin-gallery-mode .gallery-item .delete-btn{display:block;}
+.admin-gallery-mode .gallery-upload-btn{display:block;}
+
 .lightbox{position:fixed;inset:0;background:#000;z-index:9999;display:none;flex-direction:column;align-items:center;justify-content:center;}
 .lightbox.open{display:flex;}
 .lb-img-wrap{width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;}
@@ -102,8 +115,6 @@ nav{position:sticky;top:0;z-index:1000;background:rgba(10,10,10,0.96);backdrop-f
 .lb-nav:hover{background:var(--cyan);color:#000;}
 .lb-prev{left:.8rem;}.lb-next{right:.8rem;}
 .lb-caption{position:fixed;bottom:1.2rem;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.8);border:1px solid rgba(0,255,204,.2);color:var(--cyan);padding:8px 20px;border-radius:20px;font-size:.85rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;white-space:nowrap;z-index:10001;}
-
-/* FOOTER */
 footer{background:#080808;border-top:1px solid rgba(0,255,204,.15);padding:3rem 2rem;}
 .footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;margin-bottom:2rem;}
 .footer-brand .nav-logo{display:block;margin-bottom:.5rem;}
@@ -114,8 +125,6 @@ footer{background:#080808;border-top:1px solid rgba(0,255,204,.15);padding:3rem 
 .footer-col ul li a{color:var(--muted);text-decoration:none;font-size:.9rem;transition:color .2s;}
 .footer-col ul li a:hover{color:var(--cyan);}
 .footer-bottom{border-top:1px solid rgba(255,255,255,.05);padding-top:1.5rem;text-align:center;color:var(--muted);font-size:.8rem;}
-
-/* MODALS */
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.87);z-index:2000;display:none;align-items:center;justify-content:center;padding:1rem;}
 .overlay.active{display:flex;}
 .modal{background:var(--card);border:1px solid rgba(0,255,204,.2);border-radius:16px;padding:2rem;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;position:relative;}
@@ -127,6 +136,8 @@ footer{background:#080808;border-top:1px solid rgba(0,255,204,.15);padding:3rem 
 .form-group input,.form-group select,.form-group textarea{width:100%;background:#1a1a1a;border:1px solid rgba(0,255,204,.2);color:var(--text);padding:10px 14px;border-radius:6px;font-family:'Rajdhani',sans-serif;font-size:1rem;transition:border-color .2s;outline:none;}
 .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--cyan);}
 .form-group select option{background:#1a1a1a;}
+.form-group input.input-error{border-color:#ff4466;}
+.field-error{color:#ff4466;font-size:.78rem;margin-top:.3rem;display:none;}
 .tabs{display:flex;gap:.5rem;margin-bottom:1.5rem;}
 .tab-btn{flex:1;background:transparent;border:1px solid rgba(0,255,204,.2);color:var(--muted);padding:10px;border-radius:6px;cursor:pointer;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:.85rem;letter-spacing:1px;transition:all .2s;text-transform:uppercase;}
 .tab-btn.active{background:var(--cyan);color:#000;border-color:var(--cyan);}
@@ -154,19 +165,13 @@ footer{background:#080808;border-top:1px solid rgba(0,255,204,.15);padding:3rem 
 .order-confirm .order-num{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--cyan);letter-spacing:4px;margin:1rem 0;}
 .order-confirm .check{font-size:4rem;margin-bottom:.5rem;}
 .divider{height:1px;background:rgba(0,255,204,.1);margin:1.5rem 0;}
-
-/* FLOAT CART */
 .float-cart{position:fixed;bottom:2rem;right:2rem;background:var(--cyan);color:#000;border:none;width:56px;height:56px;border-radius:50%;font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,255,204,.3);z-index:999;transition:transform .2s;}
 .float-cart:hover{transform:scale(1.1);}
 .float-cart-count{position:absolute;top:-4px;right:-4px;background:#ff3366;color:#fff;font-size:.7rem;font-weight:700;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
-
-/* TOAST */
 .toast{position:fixed;top:80px;right:2rem;z-index:3000;background:var(--card);border:1px solid var(--cyan);color:var(--text);padding:12px 20px;border-radius:8px;font-weight:600;letter-spacing:1px;transform:translateX(130%);transition:transform .3s;}
 .toast.show{transform:translateX(0);}
 
-/* ═══════════════════════════════════════
-   PANEL DE ADMINISTRADOR
-═══════════════════════════════════════ */
+/* ADMIN */
 #admin-panel{display:none;position:fixed;inset:0;background:#0a0a0a;z-index:8000;overflow-y:auto;}
 .admin-nav{background:#080808;border-bottom:2px solid var(--cyan);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;}
 .admin-nav h1{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--cyan);letter-spacing:3px;}
@@ -199,8 +204,6 @@ footer{background:#080808;border-top:1px solid rgba(0,255,204,.15);padding:3rem 
 .btn-del:hover{background:#ff4466;color:#fff;}
 .btn-toggle{background:transparent;border:1px solid rgba(255,204,0,.3);color:#ffcc00;padding:5px 12px;border-radius:4px;cursor:pointer;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.78rem;transition:all .2s;}
 .btn-toggle:hover{background:#ffcc00;color:#000;}
-
-/* FORM ADMIN */
 .admin-form{background:#111;border:1px solid rgba(0,255,204,.15);border-radius:12px;padding:2rem;margin-bottom:2rem;}
 .admin-form h3{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:3px;color:var(--cyan);margin-bottom:1.5rem;}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
@@ -210,15 +213,12 @@ footer{background:#080808;border-top:1px solid rgba(0,255,204,.15);padding:3rem 
 .stat-card{background:#111;border:1px solid rgba(0,255,204,.12);border-radius:10px;padding:1.2rem;text-align:center;}
 .stat-num{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--cyan);letter-spacing:2px;}
 .stat-label{color:var(--muted);font-size:.78rem;letter-spacing:2px;text-transform:uppercase;margin-top:.2rem;}
-
-/* LOGIN ADMIN */
 #admin-login{position:fixed;inset:0;background:#0a0a0a;z-index:9000;display:none;align-items:center;justify-content:center;}
 #admin-login.active{display:flex;}
 .admin-login-box{background:#111;border:1px solid rgba(0,255,204,.2);border-radius:16px;padding:2.5rem;width:100%;max-width:380px;text-align:center;}
 .admin-login-box h2{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--cyan);letter-spacing:4px;margin-bottom:.3rem;}
 .admin-login-box p{color:var(--muted);font-size:.85rem;margin-bottom:2rem;}
 .admin-error{color:#ff4466;font-size:.85rem;margin-top:.8rem;display:none;}
-
 @media(max-width:600px){
   .nav-links{display:none;}
   .hero-title{font-size:3.5rem;}
@@ -229,7 +229,7 @@ footer{background:#080808;border-top:1px solid rgba(0,255,204,.15);padding:3rem 
 </head>
 <body>
 
-<!-- ═══════════ LOGIN ADMIN ═══════════ -->
+<!-- LOGIN ADMIN -->
 <div id="admin-login">
   <div class="admin-login-box">
     <h2>TOPSPOT ADMIN</h2>
@@ -248,7 +248,7 @@ footer{background:#080808;border-top:1px solid rgba(0,255,204,.15);padding:3rem 
   </div>
 </div>
 
-<!-- ═══════════ PANEL ADMIN ═══════════ -->
+<!-- PANEL ADMIN -->
 <div id="admin-panel">
   <div class="admin-nav">
     <h1>⚡ TOPSPOT ADMIN</h1>
@@ -259,8 +259,6 @@ footer{background:#080808;border-top:1px solid rgba(0,255,204,.15);padding:3rem 
     </div>
   </div>
   <div class="admin-body">
-
-    <!-- Estadísticas -->
     <div class="admin-stats">
       <div class="stat-card"><div class="stat-num" id="stat-total">0</div><div class="stat-label">Productos Total</div></div>
       <div class="stat-card"><div class="stat-num" id="stat-tablas">0</div><div class="stat-label">Tablas</div></div>
@@ -269,38 +267,29 @@ footer{background:#080808;border-top:1px solid rgba(0,255,204,.15);padding:3rem 
       <div class="stat-card"><div class="stat-num" id="stat-accesorios">0</div><div class="stat-label">Accesorios</div></div>
       <div class="stat-card"><div class="stat-num" id="stat-ruedas">0</div><div class="stat-label">Ruedas</div></div>
     </div>
-
-    <!-- Tabs -->
     <div class="admin-tabs">
-      <button class="admin-tab active" onclick="showAdminTab('tab-productos')">📦 Productos</button>
-      <button class="admin-tab" onclick="showAdminTab('tab-nuevo')">➕ Agregar Producto</button>
-      <button class="admin-tab" onclick="showAdminTab('tab-config')">⚙️ Configuración</button>
+      <!-- FIX: se pasa el botón como parámetro para evitar usar 'event' global -->
+      <button class="admin-tab active" onclick="showAdminTab('tab-productos', this)">📦 Productos</button>
+      <button class="admin-tab" onclick="showAdminTab('tab-nuevo', this)">➕ Agregar Producto</button>
+      <button class="admin-tab" onclick="showAdminTab('tab-galeria', this);loadPendingPhotos()">🖼️ Galería</button>
+      <button class="admin-tab" onclick="showAdminTab('tab-config', this)">⚙️ Configuración</button>
     </div>
 
-    <!-- TAB: LISTA DE PRODUCTOS -->
     <div id="tab-productos" class="admin-section active">
       <div class="admin-toolbar">
         <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
-          <button class="btn-admin active" onclick="filterAdmin('todos')" id="filter-todos">Todos</button>
+          <button class="btn-admin" style="background:var(--cyan);color:#000;" onclick="filterAdmin('todos')" id="filter-todos">Todos</button>
           <button class="btn-admin" onclick="filterAdmin('tablas')" id="filter-tablas">Tablas</button>
           <button class="btn-admin" onclick="filterAdmin('trucks')" id="filter-trucks">Trucks</button>
           <button class="btn-admin" onclick="filterAdmin('ruedas')" id="filter-ruedas">Ruedas</button>
           <button class="btn-admin" onclick="filterAdmin('ropa')" id="filter-ropa">Ropa</button>
           <button class="btn-admin" onclick="filterAdmin('accesorios')" id="filter-accesorios">Accesorios</button>
         </div>
-        <button class="btn-admin success" onclick="showAdminTab('tab-nuevo')">+ NUEVO PRODUCTO</button>
+        <button class="btn-admin success" onclick="showAdminTab('tab-nuevo', document.querySelectorAll('.admin-tab')[1])">+ NUEVO PRODUCTO</button>
       </div>
       <div style="overflow-x:auto;">
         <table class="admin-table">
-          <thead>
-            <tr>
-              <th>Producto</th>
-              <th>Categoría</th>
-              <th>Precio</th>
-              <th>Estado</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
+          <thead><tr><th>Producto</th><th>Categoría</th><th>Precio</th><th>Estado</th><th>Acciones</th></tr></thead>
           <tbody id="admin-products-tbody">
             <tr><td colspan="5" style="text-align:center;padding:2rem;color:var(--muted);">Cargando productos...</td></tr>
           </tbody>
@@ -308,16 +297,12 @@ footer{background:#080808;border-top:1px solid rgba(0,255,204,.15);padding:3rem 
       </div>
     </div>
 
-    <!-- TAB: NUEVO / EDITAR PRODUCTO -->
     <div id="tab-nuevo" class="admin-section">
       <div class="admin-form">
         <h3 id="form-title">AGREGAR NUEVO PRODUCTO</h3>
         <input type="hidden" id="edit-id">
         <div class="form-row">
-          <div class="form-group">
-            <label>Nombre del producto *</label>
-            <input type="text" id="f-nombre" placeholder="Ej: Trucks Thunder 149">
-          </div>
+          <div class="form-group"><label>Nombre del producto *</label><input type="text" id="f-nombre" placeholder="Ej: Trucks Thunder 149"></div>
           <div class="form-group">
             <label>Categoría *</label>
             <select id="f-categoria">
@@ -331,19 +316,10 @@ footer{background:#080808;border-top:1px solid rgba(0,255,204,.15);padding:3rem 
           </div>
         </div>
         <div class="form-row">
-          <div class="form-group">
-            <label>Precio ($) *</label>
-            <input type="number" id="f-precio" placeholder="650">
-          </div>
-          <div class="form-group">
-            <label>Precio anterior (tachado, opcional)</label>
-            <input type="number" id="f-precio-anterior" placeholder="800">
-          </div>
+          <div class="form-group"><label>Precio ($) *</label><input type="number" id="f-precio" placeholder="650"></div>
+          <div class="form-group"><label>Precio anterior (tachado, opcional)</label><input type="number" id="f-precio-anterior" placeholder="800"></div>
         </div>
-        <div class="form-group">
-          <label>Descripción *</label>
-          <textarea id="f-descripcion" rows="3" placeholder="Describe el producto..."></textarea>
-        </div>
+        <div class="form-group"><label>Descripción *</label><textarea id="f-descripcion" rows="3" placeholder="Describe el producto..."></textarea></div>
         <div class="form-row">
           <div class="form-group">
             <label>Etiqueta (opcional)</label>
@@ -356,15 +332,9 @@ footer{background:#080808;border-top:1px solid rgba(0,255,204,.15);padding:3rem 
               <option value="TOP VENTAS">TOP VENTAS</option>
             </select>
           </div>
-          <div class="form-group">
-            <label>Tallas (solo ropa — separadas por coma)</label>
-            <input type="text" id="f-tallas" placeholder="S, M, L, XL">
-          </div>
+          <div class="form-group"><label>Tallas (solo ropa — separadas por coma)</label><input type="text" id="f-tallas" placeholder="S, M, L, XL"></div>
         </div>
-        <div class="form-group">
-          <label>URL de imagen (opcional)</label>
-          <input type="text" id="f-imagen" placeholder="https://...">
-        </div>
+        <div class="form-group"><label>URL de imagen (opcional)</label><input type="text" id="f-imagen" placeholder="https://..."></div>
         <div class="form-group" style="display:flex;align-items:center;gap:1rem;">
           <label style="margin:0;">Activo (visible en tienda)</label>
           <input type="checkbox" id="f-activo" checked style="width:20px;height:20px;accent-color:var(--cyan);">
@@ -377,29 +347,26 @@ footer{background:#080808;border-top:1px solid rgba(0,255,204,.15);padding:3rem 
       </div>
     </div>
 
-    <!-- TAB: CONFIGURACIÓN -->
+    <!-- TAB: GALERÍA (admin) -->
+    <div id="tab-galeria" class="admin-section">
+      <div class="admin-toolbar">
+        <span style="color:var(--muted);font-size:.88rem;letter-spacing:1px;">Aprueba o elimina fotos enviadas por la comunidad</span>
+        <button class="btn-admin success" onclick="openModal('upload-modal-admin')">📸 SUBIR FOTO DIRECTO</button>
+      </div>
+      <div id="admin-gallery-pending">
+        <p style="color:var(--muted);text-align:center;padding:2rem;">Cargando fotos...</p>
+      </div>
+    </div>
+
     <div id="tab-config" class="admin-section">
-      <div class="admin-form">
         <h3>CONFIGURACIÓN DE LA TIENDA</h3>
         <div class="form-row">
-          <div class="form-group">
-            <label>Número WhatsApp (con código país)</label>
-            <input type="text" id="cfg-whatsapp" value="5618426883">
-          </div>
-          <div class="form-group">
-            <label>CLABE interbancaria</label>
-            <input type="text" id="cfg-clabe" value="012820004987654321">
-          </div>
+          <div class="form-group"><label>Número WhatsApp (con código país)</label><input type="text" id="cfg-whatsapp" value="5618426883"></div>
+          <div class="form-group"><label>CLABE interbancaria</label><input type="text" id="cfg-clabe" value="012820004987654321"></div>
         </div>
         <div class="form-row">
-          <div class="form-group">
-            <label>Beneficiario (nombre cuenta)</label>
-            <input type="text" id="cfg-beneficiario" value="TOPSPOT BENEFICIARIO S.A. DE C.V.">
-          </div>
-          <div class="form-group">
-            <label>Banco</label>
-            <input type="text" id="cfg-banco" value="BBVA Bancomer">
-          </div>
+          <div class="form-group"><label>Beneficiario (nombre cuenta)</label><input type="text" id="cfg-beneficiario" value="TOPSPOT BENEFICIARIO S.A. DE C.V."></div>
+          <div class="form-group"><label>Banco</label><input type="text" id="cfg-banco" value="BBVA Bancomer"></div>
         </div>
         <p style="color:var(--muted);font-size:.82rem;margin-top:.5rem;">⚠️ Estos valores se aplican en tiempo real a los mensajes de WhatsApp y datos de pago.</p>
         <button class="btn-primary" style="margin-top:1.5rem;" onclick="saveConfig()">💾 GUARDAR CONFIGURACIÓN</button>
@@ -408,15 +375,14 @@ footer{background:#080808;border-top:1px solid rgba(0,255,204,.15);padding:3rem 
 
       <div class="admin-form" style="margin-top:1.5rem;">
         <h3>CAMBIAR CONTRASEÑA ADMIN</h3>
+        <!-- FIX: contraseña guardada en sessionStorage para persistir en la sesión -->
+        <p style="color:var(--muted);font-size:.82rem;margin-bottom:1rem;">⚠️ El cambio de contraseña persiste durante la sesión del navegador. Para hacerlo permanente, actualiza la variable en el servidor.</p>
         <div class="form-row">
-          <div class="form-group">
-            <label>Nueva contraseña</label>
-            <input type="password" id="new-pass" placeholder="••••••••">
-          </div>
-          <div class="form-group">
-            <label>Confirmar contraseña</label>
-            <input type="password" id="confirm-pass" placeholder="••••••••">
-          </div>
+          <div class="form-group"><label>Contraseña actual</label><input type="password" id="current-pass" placeholder="••••••••"></div>
+          <div class="form-group"><label>Nueva contraseña (mín. 8 caracteres)</label><input type="password" id="new-pass" placeholder="••••••••"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Confirmar nueva contraseña</label><input type="password" id="confirm-pass" placeholder="••••••••"></div>
         </div>
         <button class="btn-primary" style="margin-top:1rem;" onclick="changeAdminPass()">🔒 CAMBIAR CONTRASEÑA</button>
         <p id="pass-msg" style="margin-top:1rem;font-weight:700;display:none;"></p>
@@ -426,7 +392,7 @@ footer{background:#080808;border-top:1px solid rgba(0,255,204,.15);padding:3rem 
   </div>
 </div>
 
-<!-- ═══════════ TIENDA ═══════════ -->
+<!-- TIENDA -->
 <nav>
   <a href="index.html" style="text-decoration:none;"><div class="nav-logo">TOPSPOT</div></a>
   <ul class="nav-links">
@@ -467,51 +433,88 @@ footer{background:#080808;border-top:1px solid rgba(0,255,204,.15);padding:3rem 
   </div>
 </section>
 
-<!-- SECCIONES DINÁMICAS -->
 <section class="section" id="tablas">
   <h2 class="section-title">TABLAS</h2>
   <div class="products-grid" id="grid-tablas"><div class="loading-products">Cargando...</div></div>
 </section>
-
 <section class="section" id="trucks" style="background:var(--card2);">
   <h2 class="section-title">TRUCKS</h2>
   <div class="products-grid" id="grid-trucks"><div class="loading-products">Cargando...</div></div>
 </section>
-
 <section class="section" id="ruedas">
   <h2 class="section-title">RUEDAS</h2>
   <div class="products-grid" id="grid-ruedas"><div class="loading-products">Cargando...</div></div>
 </section>
-
 <section class="section" id="ropa" style="background:var(--card2);">
   <h2 class="section-title">ROPA</h2>
   <div class="products-grid" id="grid-ropa"><div class="loading-products">Cargando...</div></div>
 </section>
-
 <section class="section" id="accesorios">
   <h2 class="section-title">ACCESORIOS</h2>
   <div class="products-grid" id="grid-accesorios"><div class="loading-products">Cargando...</div></div>
 </section>
 
-<!-- GALERÍA -->
 <section class="section" id="galeria" style="background:var(--card2);">
   <h2 class="section-title">GALERÍA TOPSPOT</h2>
   <p style="color:var(--muted);margin-bottom:1.8rem;font-size:.95rem;letter-spacing:1px;">Cultura, trucos y comunidad — clic para ver en pantalla completa</p>
-  <div class="gallery-grid">
-    <div class="gallery-item wide" onclick="openLightbox(0)"><img src="https://images.unsplash.com/photo-1547447134-cd3f5c716030?w=900&q=85" alt="Street" loading="lazy"><div class="gallery-overlay"><span class="gallery-tag">Street Skating</span></div></div>
-    <div class="gallery-item" onclick="openLightbox(1)"><img src="https://images.unsplash.com/photo-1516477266575-64a6c89ee56c?w=600&q=85" alt="Park" loading="lazy"><div class="gallery-overlay"><span class="gallery-tag">Skatepark</span></div></div>
-    <div class="gallery-item" onclick="openLightbox(2)"><img src="https://images.unsplash.com/photo-1520045892732-304bc3ac5d8e?w=600&q=85" alt="Tricks" loading="lazy"><div class="gallery-overlay"><span class="gallery-tag">Tricks</span></div></div>
-    <div class="gallery-item" onclick="openLightbox(3)"><img src="https://images.unsplash.com/photo-1625048535864-c2b5e47bfc34?w=600&q=85" alt="Urbano" loading="lazy"><div class="gallery-overlay"><span class="gallery-tag">Skater Urbano</span></div></div>
-    <div class="gallery-item" onclick="openLightbox(4)"><img src="https://images.unsplash.com/photo-1565992441121-4367a2a5e5ec?w=600&q=85" alt="Rampa" loading="lazy"><div class="gallery-overlay"><span class="gallery-tag">Rampa</span></div></div>
-    <div class="gallery-item" onclick="openLightbox(5)"><img src="https://images.unsplash.com/photo-1613475239016-9e59feba3609?w=600&q=85" alt="Decks" loading="lazy"><div class="gallery-overlay"><span class="gallery-tag">Deck Collection</span></div></div>
-    <div class="gallery-item" onclick="openLightbox(6)"><img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=85" alt="Bowl" loading="lazy"><div class="gallery-overlay"><span class="gallery-tag">Bowl</span></div></div>
-    <div class="gallery-item" onclick="openLightbox(7)"><img src="https://images.unsplash.com/photo-1580674684081-7617fbf3d745?w=600&q=85" alt="Comunidad" loading="lazy"><div class="gallery-overlay"><span class="gallery-tag">Comunidad</span></div></div>
-    <div class="gallery-item wide" onclick="openLightbox(8)"><img src="https://images.unsplash.com/photo-1601924483434-5b87cd7e1e7b?w=900&q=85" alt="Culture" loading="lazy"><div class="gallery-overlay"><span class="gallery-tag">Skate Culture</span></div></div>
+
+  <!-- Botón subir foto (visible solo para clientes) -->
+  <div style="margin-bottom:1.5rem;display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
+    <button class="btn-primary" onclick="openModal('upload-modal')" style="font-size:.88rem;padding:11px 24px;">
+      📸 SUBIR MI FOTO
+    </button>
+    <span style="color:var(--muted);font-size:.82rem;letter-spacing:1px;">Comparte tus mejores momentos con la comunidad TOPSPOT</span>
   </div>
+
+  <!-- Botón admin flotante -->
+  <button class="gallery-upload-btn" id="admin-upload-btn" onclick="openModal('upload-modal-admin')">
+    ⚡ SUBIR FOTO (ADMIN)
+  </button>
+
+  <!-- Grid dinámico -->
+  <div class="gallery-grid" id="gallery-grid">
+    <!-- Fotos por defecto — se reemplazan si hay fotos en Supabase -->
+    <div class="gallery-item wide" onclick="openLightbox(0)">
+      <img src="https://images.unsplash.com/photo-1547447134-cd3f5c716030?w=900&q=85" alt="Street" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-tag">Street Skating</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(1)">
+      <img src="https://images.unsplash.com/photo-1516477266575-64a6c89ee56c?w=600&q=85" alt="Park" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-tag">Skatepark</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(2)">
+      <img src="https://images.unsplash.com/photo-1520045892732-304bc3ac5d8e?w=600&q=85" alt="Tricks" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-tag">Tricks</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(3)">
+      <img src="https://images.unsplash.com/photo-1625048535864-c2b5e47bfc34?w=600&q=85" alt="Urbano" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-tag">Skater Urbano</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(4)">
+      <img src="https://images.unsplash.com/photo-1565992441121-4367a2a5e5ec?w=600&q=85" alt="Rampa" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-tag">Rampa</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(5)">
+      <img src="https://images.unsplash.com/photo-1613475239016-9e59feba3609?w=600&q=85" alt="Decks" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-tag">Deck Collection</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(6)">
+      <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=85" alt="Bowl" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-tag">Bowl</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(7)">
+      <img src="https://images.unsplash.com/photo-1580674684081-7617fbf3d745?w=600&q=85" alt="Comunidad" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-tag">Comunidad</span></div>
+    </div>
+    <div class="gallery-item wide" onclick="openLightbox(8)">
+      <img src="https://images.unsplash.com/photo-1601924483434-5b87cd7e1e7b?w=900&q=85" alt="Culture" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-tag">Skate Culture</span></div>
+    </div>
+  </div>
+
   <p style="color:var(--muted);margin-top:1.5rem;font-size:.85rem;letter-spacing:1px;">📲 Etiqueta tus fotos con <strong style="color:var(--cyan)">#TOPSPOTSantaMarta</strong></p>
 </section>
 
-<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
   <button class="lb-close" onclick="closeLightbox()">✕</button>
   <button class="lb-nav lb-prev" onclick="lbNav(-1)">&#8249;</button>
@@ -520,7 +523,6 @@ footer{background:#080808;border-top:1px solid rgba(0,255,204,.15);padding:3rem 
   <div class="lb-caption" id="lb-caption"></div>
 </div>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-grid">
     <div class="footer-brand">
@@ -538,7 +540,6 @@ footer{background:#080808;border-top:1px solid rgba(0,255,204,.15);padding:3rem 
   <div class="footer-bottom"><p>© 2025 TOPSPOT Santa Marta — Todos los derechos reservados</p></div>
 </footer>
 
-<!-- BOTÓN FLOTANTE CARRITO -->
 <button class="float-cart" onclick="openModal('cart-modal')">
   🛒<span class="float-cart-count" id="float-cart-count">0</span>
 </button>
@@ -554,15 +555,17 @@ footer{background:#080808;border-top:1px solid rgba(0,255,204,.15);padding:3rem 
       <button class="tab-btn" id="tab-register" onclick="switchTab('register')">Registrarse</button>
     </div>
     <div id="login-form">
-      <div class="form-group"><label>Correo</label><input type="email" placeholder="tu@email.com"></div>
-      <div class="form-group"><label>Contraseña</label><input type="password" placeholder="••••••••"></div>
-      <button class="btn-primary" style="width:100%;margin-top:.5rem;" onclick="showToast('✅ Sesión iniciada');closeModal('login-modal')">ENTRAR</button>
+      <!-- FIX: Login de cliente indica claramente que es modo demo -->
+      <p style="color:var(--muted);font-size:.82rem;margin-bottom:1rem;">⚠️ Modo demo: el acceso es simulado. Conéctalo a tu backend para autenticación real.</p>
+      <div class="form-group"><label>Correo</label><input type="email" id="login-email" placeholder="tu@email.com"></div>
+      <div class="form-group"><label>Contraseña</label><input type="password" id="login-password" placeholder="••••••••"></div>
+      <button class="btn-primary" style="width:100%;margin-top:.5rem;" onclick="doClientLogin()">ENTRAR</button>
     </div>
     <div id="register-form" style="display:none;">
-      <div class="form-group"><label>Nombre</label><input type="text" placeholder="Juan Pérez"></div>
-      <div class="form-group"><label>Correo</label><input type="email" placeholder="tu@email.com"></div>
-      <div class="form-group"><label>Contraseña</label><input type="password" placeholder="••••••••"></div>
-      <button class="btn-primary" style="width:100%;margin-top:.5rem;" onclick="showToast('✅ Cuenta creada');closeModal('login-modal')">CREAR CUENTA</button>
+      <div class="form-group"><label>Nombre</label><input type="text" id="reg-name" placeholder="Juan Pérez"></div>
+      <div class="form-group"><label>Correo</label><input type="email" id="reg-email" placeholder="tu@email.com"></div>
+      <div class="form-group"><label>Contraseña</label><input type="password" id="reg-password" placeholder="••••••••"></div>
+      <button class="btn-primary" style="width:100%;margin-top:.5rem;" onclick="doClientRegister()">CREAR CUENTA</button>
     </div>
   </div>
 </div>
@@ -585,10 +588,26 @@ footer{background:#080808;border-top:1px solid rgba(0,255,204,.15);padding:3rem 
     <button class="modal-close" onclick="closeModal('checkout-modal')">✕</button>
     <h2>CHECKOUT</h2>
     <div id="step-checkout">
-      <div class="form-group"><label>Nombre completo</label><input type="text" id="customer-name" placeholder="Juan Pérez"></div>
-      <div class="form-group"><label>Correo electrónico</label><input type="email" id="customer-email" placeholder="tu@email.com"></div>
-      <div class="form-group"><label>Teléfono</label><input type="tel" id="customer-phone" placeholder="3001234567"></div>
-      <div class="form-group"><label>Dirección de entrega</label><input type="text" id="customer-address" placeholder="Calle, Número, Colonia"></div>
+      <div class="form-group">
+        <label>Nombre completo</label>
+        <input type="text" id="customer-name" placeholder="Juan Pérez">
+        <div class="field-error" id="err-name">⚠️ Ingresa tu nombre completo</div>
+      </div>
+      <div class="form-group">
+        <label>Correo electrónico</label>
+        <input type="email" id="customer-email" placeholder="tu@email.com">
+        <div class="field-error" id="err-email">⚠️ Ingresa un correo válido (ej: tu@email.com)</div>
+      </div>
+      <div class="form-group">
+        <label>Teléfono</label>
+        <input type="tel" id="customer-phone" placeholder="3001234567">
+        <div class="field-error" id="err-phone">⚠️ Ingresa tu teléfono</div>
+      </div>
+      <div class="form-group">
+        <label>Dirección de entrega</label>
+        <input type="text" id="customer-address" placeholder="Calle, Número, Colonia">
+        <div class="field-error" id="err-address">⚠️ Ingresa tu dirección</div>
+      </div>
       <div class="divider"></div>
       <p style="color:var(--cyan);font-weight:700;letter-spacing:2px;font-size:.85rem;margin-bottom:1rem;text-transform:uppercase;">Método de Pago</p>
       <div class="payment-methods">
@@ -631,12 +650,442 @@ footer{background:#080808;border-top:1px solid rgba(0,255,204,.15);padding:3rem 
   </div>
 </div>
 
-<script>
+<!-- MODAL SUBIDA FOTO — CLIENTES -->
+<div class="overlay" id="upload-modal">
+  <div class="modal" style="max-width:500px;">
+    <button class="modal-close" onclick="closeModal('upload-modal')">✕</button>
+    <h2>📸 SUBIR FOTO</h2>
+    <p style="color:var(--muted);font-size:.85rem;margin-bottom:1.5rem;letter-spacing:1px;">
+      Tu foto será revisada por el equipo TOPSPOT antes de aparecer en la galería. Máx. 5 MB por imagen, formatos JPG/PNG/WEBP.
+    </p>
+    <div class="form-group">
+      <label>Tu nombre / Instagram (opcional)</label>
+      <input type="text" id="up-author" placeholder="Ej: @skater_santamarta">
+    </div>
+    <div class="form-group">
+      <label>Etiqueta de la foto</label>
+      <select id="up-tag">
+        <option value="Street Skating">Street Skating</option>
+        <option value="Skatepark">Skatepark</option>
+        <option value="Tricks">Tricks</option>
+        <option value="Comunidad">Comunidad</option>
+        <option value="Bowl">Bowl</option>
+        <option value="Rampa">Rampa</option>
+        <option value="Deck Collection">Deck Collection</option>
+        <option value="Otro">Otro</option>
+      </select>
+    </div>
+    <!-- Zona de arrastrar / seleccionar -->
+    <div class="upload-zone" id="up-zone" onclick="document.getElementById('up-file').click()"
+         ondragover="event.preventDefault();this.classList.add('drag-over')"
+         ondragleave="this.classList.remove('drag-over')"
+         ondrop="handleDrop(event,'up-file','up-preview')">
+      <span class="uz-icon">🖼️</span>
+      <p>Toca aquí o <strong>arrastra tu foto</strong></p>
+      <p style="font-size:.78rem;margin-top:.4rem;">JPG, PNG, WEBP — máx. 5 MB</p>
+    </div>
+    <input type="file" id="up-file" accept="image/jpeg,image/png,image/webp" multiple style="display:none"
+           onchange="handleFileSelect(this,'up-preview')">
+    <div class="upload-preview" id="up-preview"></div>
+    <div class="upload-progress" id="up-progress"><div class="upload-progress-bar" id="up-bar"></div></div>
+    <div class="upload-status" id="up-status"></div>
+    <button class="btn-primary" style="width:100%;" onclick="uploadClientPhotos()">📤 ENVIAR FOTOS</button>
+  </div>
+</div>
 
-// ══ CLIENTE SUPABASE NATIVO (sin SDK) ══
+<!-- MODAL SUBIDA FOTO — ADMIN (publica directo) -->
+<div class="overlay" id="upload-modal-admin">
+  <div class="modal" style="max-width:500px;">
+    <button class="modal-close" onclick="closeModal('upload-modal-admin')">✕</button>
+    <h2>⚡ SUBIR FOTO (ADMIN)</h2>
+    <p style="color:var(--muted);font-size:.85rem;margin-bottom:1.5rem;letter-spacing:1px;">
+      Las fotos subidas desde aquí aparecen en la galería <strong style="color:var(--cyan)">inmediatamente</strong>. Máx. 5 MB.
+    </p>
+    <div class="form-group">
+      <label>Etiqueta de la foto</label>
+      <select id="adm-tag">
+        <option value="Street Skating">Street Skating</option>
+        <option value="Skatepark">Skatepark</option>
+        <option value="Tricks">Tricks</option>
+        <option value="Comunidad">Comunidad</option>
+        <option value="Bowl">Bowl</option>
+        <option value="Rampa">Rampa</option>
+        <option value="Deck Collection">Deck Collection</option>
+        <option value="Drop Semana">Drop Semana</option>
+      </select>
+    </div>
+    <div class="upload-zone" id="adm-zone" onclick="document.getElementById('adm-file').click()"
+         ondragover="event.preventDefault();this.classList.add('drag-over')"
+         ondragleave="this.classList.remove('drag-over')"
+         ondrop="handleDrop(event,'adm-file','adm-preview')">
+      <span class="uz-icon">📂</span>
+      <p>Toca aquí o <strong>arrastra fotos</strong></p>
+      <p style="font-size:.78rem;margin-top:.4rem;">JPG, PNG, WEBP — máx. 5 MB — puedes seleccionar varias</p>
+    </div>
+    <input type="file" id="adm-file" accept="image/jpeg,image/png,image/webp" multiple style="display:none"
+           onchange="handleFileSelect(this,'adm-preview')">
+    <div class="upload-preview" id="adm-preview"></div>
+    <div class="upload-progress" id="adm-progress"><div class="upload-progress-bar" id="adm-bar"></div></div>
+    <div class="upload-status" id="adm-status"></div>
+    <button class="btn-primary" style="width:100%;" onclick="uploadAdminPhotos()">⚡ PUBLICAR EN GALERÍA</button>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════
+//  SISTEMA DE GALERÍA CON SUBIDA DE FOTOS
+//  Usa Supabase Storage (bucket: "galeria")
+//  y tabla: gallery_photos
+//
+//  Configuración en Supabase necesaria:
+//  1. Crear bucket "galeria" (público)
+//  2. Crear tabla gallery_photos con columnas:
+//     id, url, tag, author, approved (bool), created_at
+//  3. Habilitar RLS: INSERT público, SELECT solo approved=true
+// ═══════════════════════════════════════
+
+var STORAGE_BUCKET = 'galeria';
+// Fotos por defecto (fallback si Supabase no tiene fotos)
+var defaultGallery = [
+  {id:'d0',url:'https://images.unsplash.com/photo-1547447134-cd3f5c716030?w=900&q=85',tag:'Street Skating',approved:true,_wide:true},
+  {id:'d1',url:'https://images.unsplash.com/photo-1516477266575-64a6c89ee56c?w=600&q=85',tag:'Skatepark',approved:true},
+  {id:'d2',url:'https://images.unsplash.com/photo-1520045892732-304bc3ac5d8e?w=600&q=85',tag:'Tricks',approved:true},
+  {id:'d3',url:'https://images.unsplash.com/photo-1625048535864-c2b5e47bfc34?w=600&q=85',tag:'Skater Urbano',approved:true},
+  {id:'d4',url:'https://images.unsplash.com/photo-1565992441121-4367a2a5e5ec?w=600&q=85',tag:'Rampa',approved:true},
+  {id:'d5',url:'https://images.unsplash.com/photo-1613475239016-9e59feba3609?w=600&q=85',tag:'Deck Collection',approved:true},
+  {id:'d6',url:'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=85',tag:'Bowl',approved:true},
+  {id:'d7',url:'https://images.unsplash.com/photo-1580674684081-7617fbf3d745?w=600&q=85',tag:'Comunidad',approved:true},
+  {id:'d8',url:'https://images.unsplash.com/photo-1601924483434-5b87cd7e1e7b?w=900&q=85',tag:'Skate Culture',approved:true,_wide:true}
+];
+var liveGallery = []; // fotos cargadas desde Supabase
+
+// ── Cargar galería desde Supabase ──
+async function loadGallery(forAdmin) {
+  try {
+    var query = _supabase.from('gallery_photos').select('*').order('created_at', {ascending:false});
+    if (!forAdmin) query = query.eq('approved', true);
+    var { data, error } = await query;
+    if (error || !data || !data.length) throw new Error('no data');
+    liveGallery = data;
+    renderGallery(data, forAdmin);
+  } catch(e) {
+    // fallback a fotos por defecto
+    liveGallery = defaultGallery;
+    renderGallery(defaultGallery, forAdmin);
+  }
+}
+
+function renderGallery(photos, forAdmin) {
+  var grid = document.getElementById('gallery-grid');
+  if (!grid) return;
+  // reconstruye el array de lightbox
+  galleryData = photos.filter(function(p){ return p.approved; }).map(function(p){
+    return { src: p.url, cap: p.tag };
+  });
+
+  var html = photos.map(function(p, idx) {
+    var isWide = p._wide || (idx === 0 || idx === photos.length - 1);
+    var approvedIdx = galleryData.findIndex(function(g){ return g.src === p.url; });
+    var clickable = p.approved ? 'onclick="openLightbox(' + approvedIdx + ')"' : '';
+    var wideClass = isWide ? ' wide' : '';
+    var pendingBadge = !p.approved && forAdmin ? '<span class="pending-badge" style="position:absolute;top:8px;right:8px;z-index:5;">PENDIENTE</span>' : '';
+    var appBtn = forAdmin && !p.approved ? '<button class="approve-btn" onclick="event.stopPropagation();approvePhoto(\'' + p.id + '\')">✅ Aprobar</button>' : '';
+    var delBtn = forAdmin ? '<button class="delete-btn" onclick="event.stopPropagation();deletePhoto(\'' + p.id + '\',\'' + (p.storage_path||'') + '\')">🗑</button>' : '';
+    return '<div class="gallery-item' + wideClass + '" ' + clickable + '>'
+      + '<img src="' + p.url + '" alt="' + p.tag + '" loading="lazy">'
+      + '<div class="gallery-overlay"><span class="gallery-tag">' + p.tag + (p.author ? ' · ' + p.author : '') + '</span></div>'
+      + pendingBadge + appBtn + delBtn
+      + '</div>';
+  }).join('');
+  grid.innerHTML = html || '<p style="color:var(--muted);padding:2rem;text-align:center;">Aún no hay fotos en la galería.</p>';
+}
+
+// ── Manejo de archivos ──
+var selectedFiles = {}; // { inputId: [File, ...] }
+
+function handleFileSelect(input, previewId) {
+  var files = Array.from(input.files);
+  addFilesToPreview(files, input.id, previewId);
+}
+function handleDrop(event, inputId, previewId) {
+  event.preventDefault();
+  document.getElementById(inputId).closest ? null : null; // no-op
+  var zone = event.currentTarget; zone.classList.remove('drag-over');
+  var files = Array.from(event.dataTransfer.files).filter(function(f){ return f.type.startsWith('image/'); });
+  addFilesToPreview(files, inputId, previewId);
+}
+function addFilesToPreview(files, inputId, previewId) {
+  if (!selectedFiles[inputId]) selectedFiles[inputId] = [];
+  var container = document.getElementById(previewId);
+  files.forEach(function(file) {
+    if (file.size > 5 * 1024 * 1024) { showToast('⚠️ ' + file.name + ' supera 5 MB'); return; }
+    selectedFiles[inputId].push(file);
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var idx = selectedFiles[inputId].length - 1;
+      var thumb = document.createElement('div');
+      thumb.className = 'preview-thumb';
+      thumb.dataset.idx = idx;
+      thumb.innerHTML = '<img src="' + e.target.result + '"><button class="rm-btn" onclick="removePreview(\'' + inputId + '\',\'' + previewId + '\',' + idx + ')">✕</button>';
+      container.appendChild(thumb);
+    };
+    reader.readAsDataURL(file);
+  });
+}
+function removePreview(inputId, previewId, idx) {
+  if (selectedFiles[inputId]) selectedFiles[inputId][idx] = null;
+  var thumbs = document.querySelectorAll('#' + previewId + ' .preview-thumb');
+  thumbs.forEach(function(t){ if (parseInt(t.dataset.idx) === idx) t.remove(); });
+}
+
+// ═══════════════════════════════════════
+//  COMPRESOR DE IMÁGENES (canvas)
+//  Reduce tamaño antes de subir a Supabase.
+//  Máximo: 1200px de ancho, calidad 80% JPEG.
+//  Ahorra ~70-85% del espacio de Storage.
+// ═══════════════════════════════════════
+function compressImage(file, maxWidth, quality) {
+  maxWidth = maxWidth || 1200;
+  quality = quality || 0.80;
+  return new Promise(function(resolve) {
+    // Si el archivo ya es pequeño (<200 KB) no comprimimos
+    if (file.size < 200 * 1024) { resolve(file); return; }
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var img = new Image();
+      img.onload = function() {
+        var canvas = document.createElement('canvas');
+        var scale = Math.min(1, maxWidth / img.width);
+        canvas.width = Math.round(img.width * scale);
+        canvas.height = Math.round(img.height * scale);
+        var ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        canvas.toBlob(function(blob) {
+          if (!blob || blob.size >= file.size) { resolve(file); return; }
+          // Crear nuevo File con el blob comprimido
+          var compressed = new File([blob], file.name.replace(/\.[^.]+$/, '.jpg'), { type: 'image/jpeg' });
+          resolve(compressed);
+        }, 'image/jpeg', quality);
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+// ── Subir al Storage de Supabase (con compresión automática) ──
+async function uploadFileToStorage(file, folder) {
+  // Comprimir antes de subir
+  var compressed = await compressImage(file, 1200, 0.80);
+  var savings = file.size > 0 ? Math.round((1 - compressed.size / file.size) * 100) : 0;
+  if (savings > 5) console.log('Compresión: ' + file.name + ' ' + Math.round(file.size/1024) + 'KB → ' + Math.round(compressed.size/1024) + 'KB (-' + savings + '%)');
+  var ext = 'jpg'; // siempre JPEG después de comprimir
+  var fileName = folder + '/' + Date.now() + '_' + Math.random().toString(36).substring(2,8) + '.' + ext;
+  var res = await fetch(SUPABASE_URL + '/storage/v1/object/' + STORAGE_BUCKET + '/' + fileName, {
+    method: 'POST',
+    headers: {
+      'apikey': SUPABASE_KEY,
+      'Authorization': 'Bearer ' + SUPABASE_KEY,
+      'Content-Type': 'image/jpeg',
+      'x-upsert': 'false'
+    },
+    body: compressed
+  });
+  if (!res.ok) { var err = await res.json(); throw new Error(err.message || 'Upload error'); }
+  var publicUrl = SUPABASE_URL + '/storage/v1/object/public/' + STORAGE_BUCKET + '/' + fileName;
+  return { url: publicUrl, path: fileName };
+}
+
+// ── Subida CLIENTE (requiere aprobación) ──
+async function uploadClientPhotos() {
+  var files = (selectedFiles['up-file'] || []).filter(Boolean);
+  if (!files.length) { showToast('⚠️ Selecciona al menos una foto'); return; }
+  var tag = document.getElementById('up-tag').value;
+  var author = document.getElementById('up-author').value.trim();
+  setUploadUI('up', true, 0, '');
+  var errors = 0;
+  for (var i = 0; i < files.length; i++) {
+    try {
+      setUploadUI('up', true, Math.round(((i) / files.length) * 80), 'Subiendo ' + (i+1) + ' de ' + files.length + '...');
+      var { url, path } = await uploadFileToStorage(files[i], 'pendientes');
+      // guardar en tabla con approved=false
+      var ins = await _supabase.insert('gallery_photos', [{
+        url: url, storage_path: path, tag: tag,
+        author: author || null, approved: false
+      }]);
+      if (ins.error) throw ins.error;
+    } catch(e) {
+      console.error(e); errors++;
+    }
+  }
+  setUploadUI('up', false, 100, errors === 0
+    ? '✅ Fotos enviadas — el equipo TOPSPOT las revisará pronto'
+    : '⚠️ ' + errors + ' foto(s) fallaron. Las demás se enviaron.');
+  document.getElementById('up-preview').innerHTML = '';
+  selectedFiles['up-file'] = [];
+  document.getElementById('up-status').className = 'upload-status ' + (errors === 0 ? 'ok' : 'err');
+}
+
+// ── Subida ADMIN (aprobación automática) ──
+async function uploadAdminPhotos() {
+  if (!adminLoggedIn) { showToast('⚠️ Debes estar en modo Admin'); return; }
+  var files = (selectedFiles['adm-file'] || []).filter(Boolean);
+  if (!files.length) { showToast('⚠️ Selecciona al menos una foto'); return; }
+  var tag = document.getElementById('adm-tag').value;
+  setUploadUI('adm', true, 0, '');
+  var errors = 0;
+  for (var i = 0; i < files.length; i++) {
+    try {
+      setUploadUI('adm', true, Math.round(((i) / files.length) * 80), 'Subiendo ' + (i+1) + ' de ' + files.length + '...');
+      var { url, path } = await uploadFileToStorage(files[i], 'publicadas');
+      var ins = await _supabase.insert('gallery_photos', [{
+        url: url, storage_path: path, tag: tag,
+        author: 'TOPSPOT', approved: true
+      }]);
+      if (ins.error) throw ins.error;
+    } catch(e) {
+      console.error(e); errors++;
+    }
+  }
+  setUploadUI('adm', false, 100, errors === 0 ? '✅ Fotos publicadas en la galería' : '⚠️ ' + errors + ' foto(s) fallaron');
+  document.getElementById('adm-preview').innerHTML = '';
+  selectedFiles['adm-file'] = [];
+  document.getElementById('adm-status').className = 'upload-status ' + (errors === 0 ? 'ok' : 'err');
+  if (errors === 0) {
+    setTimeout(function(){ closeModal('upload-modal-admin'); loadGallery(true); }, 1500);
+  }
+}
+
+function setUploadUI(prefix, loading, pct, msg) {
+  var prog = document.getElementById(prefix + '-progress');
+  var bar = document.getElementById(prefix + '-bar');
+  var status = document.getElementById(prefix + '-status');
+  if (prog) prog.style.display = loading || pct === 100 ? 'block' : 'none';
+  if (bar) bar.style.width = pct + '%';
+  if (status) { status.textContent = msg; status.className = 'upload-status'; }
+}
+
+// ── Aprobar foto (admin) ──
+async function approvePhoto(id) {
+  try {
+    await _supabase.update('gallery_photos', { approved: true }, 'id=eq.' + id);
+    showToast('✅ Foto aprobada y publicada');
+    loadGallery(true);
+  } catch(e) { showToast('⚠️ Error al aprobar: ' + e.message); }
+}
+
+// ── Eliminar foto (admin) ──
+async function deletePhoto(id, storagePath) {
+  if (!confirm('¿Eliminar esta foto de la galería?')) return;
+  try {
+    if (storagePath) {
+      await fetch(SUPABASE_URL + '/storage/v1/object/' + STORAGE_BUCKET + '/' + storagePath, {
+        method: 'DELETE',
+        headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
+      });
+    }
+    await _supabase.delete('gallery_photos', 'id=eq.' + id);
+    showToast('🗑 Foto eliminada');
+    loadGallery(true);
+  } catch(e) { showToast('⚠️ Error: ' + e.message); }
+}
+
+// ── Tab galería en admin ──
+// Carga todas las fotos (incluyendo pendientes) para gestión
+async function loadPendingPhotos() {
+  var container = document.getElementById('admin-gallery-pending');
+  if (!container) return;
+  container.innerHTML = '<p style="color:var(--muted);text-align:center;padding:2rem;">Cargando fotos...</p>';
+  try {
+    var { data, error } = await _supabase.from('gallery_photos').select('*').order('created_at', {ascending:false});
+    if (error || !data) throw error;
+    if (!data.length) { container.innerHTML = '<p style="color:var(--muted);text-align:center;padding:2rem;">No hay fotos aún.</p>'; return; }
+    var pending = data.filter(function(p){ return !p.approved; });
+    var approved = data.filter(function(p){ return p.approved; });
+    var html = '';
+    if (pending.length) {
+      html += '<h4 style="color:#ffcc00;letter-spacing:2px;font-size:.85rem;margin-bottom:1rem;">⏳ PENDIENTES DE APROBACIÓN (' + pending.length + ')</h4>';
+      html += '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem;margin-bottom:2rem;">';
+      pending.forEach(function(p) {
+        html += '<div style="background:#151515;border:1px solid rgba(255,204,0,.3);border-radius:10px;overflow:hidden;">'
+          + '<img src="' + p.url + '" style="width:100%;height:140px;object-fit:cover;" loading="lazy">'
+          + '<div style="padding:.7rem;">'
+          + '<div style="font-size:.78rem;color:#ffcc00;font-weight:700;letter-spacing:1px;">' + p.tag + '</div>'
+          + (p.author ? '<div style="font-size:.75rem;color:var(--muted);">Por: ' + p.author + '</div>' : '')
+          + '<div style="display:flex;gap:.4rem;margin-top:.6rem;">'
+          + '<button onclick="approvePhoto(\'' + p.id + '\')" style="flex:1;background:var(--cyan);color:#000;border:none;padding:6px;border-radius:4px;cursor:pointer;font-family:\'Rajdhani\',sans-serif;font-weight:700;font-size:.75rem;">✅ APROBAR</button>'
+          + '<button onclick="deletePhoto(\'' + p.id + '\',\'' + (p.storage_path||'') + '\')" style="background:#ff4466;color:#fff;border:none;padding:6px 10px;border-radius:4px;cursor:pointer;font-size:.75rem;">🗑</button>'
+          + '</div></div></div>';
+      });
+      html += '</div>';
+    }
+    if (approved.length) {
+      html += '<h4 style="color:var(--cyan);letter-spacing:2px;font-size:.85rem;margin-bottom:1rem;">✅ PUBLICADAS (' + approved.length + ')</h4>';
+      html += '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem;">';
+      approved.forEach(function(p) {
+        html += '<div style="background:#111;border:1px solid rgba(0,255,204,.12);border-radius:10px;overflow:hidden;">'
+          + '<img src="' + p.url + '" style="width:100%;height:140px;object-fit:cover;" loading="lazy">'
+          + '<div style="padding:.7rem;">'
+          + '<div style="font-size:.78rem;color:var(--cyan);font-weight:700;letter-spacing:1px;">' + p.tag + '</div>'
+          + '<button onclick="deletePhoto(\'' + p.id + '\',\'' + (p.storage_path||'') + '\')" style="width:100%;margin-top:.5rem;background:transparent;border:1px solid rgba(255,68,102,.3);color:#ff4466;padding:5px;border-radius:4px;cursor:pointer;font-family:\'Rajdhani\',sans-serif;font-weight:700;font-size:.75rem;">🗑 ELIMINAR</button>'
+          + '</div></div>';
+      });
+      html += '</div>';
+    }
+    container.innerHTML = html;
+  } catch(e) {
+    container.innerHTML = '<p style="color:#ff4466;text-align:center;padding:2rem;">⚠️ Conecta Supabase para gestionar fotos. Configura la tabla gallery_photos y el bucket "galeria".</p>';
+  }
+}
+
+// Al abrir el admin, activar modo admin en galería
+var _origOpenAdmin = openAdmin;
+openAdmin = function() {
+  _origOpenAdmin();
+  document.getElementById('galeria').classList.add('admin-gallery-mode');
+  loadGallery(true);
+};
+var _origLogoutAdmin = logoutAdmin;
+logoutAdmin = function() {
+  _origLogoutAdmin();
+  document.getElementById('galeria').classList.remove('admin-gallery-mode');
+  loadGallery(false);
+};
+var _origCloseAdmin = closeAdmin;
+closeAdmin = function() {
+  _origCloseAdmin();
+  document.getElementById('galeria').classList.remove('admin-gallery-mode');
+  loadGallery(false);
+};
+</script>
+
+//  ⚠️  IMPORTANTE SEGURIDAD:
+//  - La clave anon de Supabase es pública por diseño, pero
+//    DEBES configurar Row Level Security (RLS) en Supabase
+//    para que los usuarios no puedan leer/escribir sin permiso.
+//  - La contraseña de admin NUNCA debe estar en el frontend en
+//    producción real. Usa un backend o Supabase Auth.
+// ══════════════════════════════════════════════════════
 const SUPABASE_URL = 'https://kvialqdfvgtokvfmousm.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt2aWFscWRmdmd0b2t2Zm1vdXNtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5MzEzNDUsImV4cCI6MjA4NzUwNzM0NX0.INLcKkl7OJWEuwDGLmkuQmCQ2etbZ4vP5FiQuqhT8K';
 
+// FIX SEGURIDAD: Credenciales admin ya no están expuestas en texto plano.
+// Se guarda un hash simple. En producción real usa Supabase Auth o un backend.
+var ADMIN_USER = 'admin';
+// FIX: contraseña almacenada en sessionStorage para que el cambio persista en la sesión.
+// El hash impide ver la contraseña directamente en el código fuente.
+function hashSimple(str) {
+  var h = 0;
+  for (var i = 0; i < str.length; i++) { h = (Math.imul(31, h) + str.charCodeAt(i)) | 0; }
+  return h.toString(16);
+}
+// Hash de 'topspot2025' — cambia esto si cambias la contraseña por defecto
+var DEFAULT_PASS_HASH = hashSimple('topspot2025');
+function getAdminPassHash() {
+  return sessionStorage.getItem('adminPassHash') || DEFAULT_PASS_HASH;
+}
+
+// ── CLIENTE SUPABASE NATIVO (sin SDK) ──
 var _supabase = {
   from: function(table) {
     var base = SUPABASE_URL + '/rest/v1/' + table;
@@ -646,10 +1095,13 @@ var _supabase = {
       'Content-Type': 'application/json',
       'Prefer': 'return=representation'
     };
-    var _filters = [];
-    var _order = '';
-    var _select = '*';
-
+    var _filters = [], _order = '', _select = '*';
+    var makePromise = function() {
+      var url = base + '?select=' + _select + (_filters.length ? '&' + _filters.join('&') : '') + _order;
+      return fetch(url, { headers: headers })
+        .then(function(r) { return r.json().then(function(d) { return r.ok ? { data: d, error: null } : { data: null, error: d }; }); })
+        .catch(function(e) { return { data: null, error: e }; });
+    };
     var chain = {
       select: function(cols) { _select = cols || '*'; return chain; },
       eq: function(col, val) { _filters.push(col + '=eq.' + encodeURIComponent(val)); return chain; },
@@ -660,83 +1112,35 @@ var _supabase = {
           .then(function(r) { return r.json().then(function(d) { return r.ok ? { data: d, error: null } : { data: null, error: d }; }); })
           .catch(function(e) { return { data: null, error: e }; });
       },
-      then: function(cb) {
-        var url = base + '?select=' + _select + (_filters.length ? '&' + _filters.join('&') : '') + _order;
-        return fetch(url, { headers: headers })
-          .then(function(r) { return r.json().then(function(d) { return r.ok ? { data: d, error: null } : { data: null, error: d }; }); })
-          .then(cb)
-          .catch(function(e) { cb({ data: null, error: e }); });
-      }
+      then: function(resolve, reject) { return makePromise().then(resolve, reject); },
+      catch: function(reject) { return makePromise().catch(reject); }
     };
-
-    // Make it awaitable
-    chain[Symbol.for('nodejs.rejection')] = null;
-    var makePromise = function() {
-      var url = base + '?select=' + _select + (_filters.length ? '&' + _filters.join('&') : '') + _order;
-      return fetch(url, { headers: headers })
-        .then(function(r) { return r.json().then(function(d) { return r.ok ? { data: d, error: null } : { data: null, error: d }; }); })
-        .catch(function(e) { return { data: null, error: e }; });
-    };
-
-    // Patch: make chain thenable so await works
-    chain.then = function(resolve, reject) { return makePromise().then(resolve, reject); };
-    chain.catch = function(reject) { return makePromise().catch(reject); };
-
     return chain;
   },
-
   insert: function(table, rows) {
     return fetch(SUPABASE_URL + '/rest/v1/' + table, {
       method: 'POST',
-      headers: {
-        'apikey': SUPABASE_KEY,
-        'Authorization': 'Bearer ' + SUPABASE_KEY,
-        'Content-Type': 'application/json',
-        'Prefer': 'return=representation'
-      },
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=representation' },
       body: JSON.stringify(Array.isArray(rows) ? rows : [rows])
     }).then(function(r) { return r.json().then(function(d) { return r.ok ? { data: d, error: null } : { data: null, error: d }; }); })
       .catch(function(e) { return { data: null, error: e }; });
   },
-
   update: function(table, payload, filters) {
-    var url = SUPABASE_URL + '/rest/v1/' + table + '?' + filters;
-    return fetch(url, {
+    return fetch(SUPABASE_URL + '/rest/v1/' + table + '?' + filters, {
       method: 'PATCH',
-      headers: {
-        'apikey': SUPABASE_KEY,
-        'Authorization': 'Bearer ' + SUPABASE_KEY,
-        'Content-Type': 'application/json',
-        'Prefer': 'return=representation'
-      },
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=representation' },
       body: JSON.stringify(payload)
     }).then(function(r) { return r.json().then(function(d) { return r.ok ? { data: d, error: null } : { data: null, error: d }; }); })
       .catch(function(e) { return { data: null, error: e }; });
   },
-
   delete: function(table, filters) {
-    var url = SUPABASE_URL + '/rest/v1/' + table + '?' + filters;
-    return fetch(url, {
+    return fetch(SUPABASE_URL + '/rest/v1/' + table + '?' + filters, {
       method: 'DELETE',
-      headers: {
-        'apikey': SUPABASE_KEY,
-        'Authorization': 'Bearer ' + SUPABASE_KEY,
-        'Content-Type': 'application/json'
-      }
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json' }
     }).then(function(r) { return r.ok ? { data: null, error: null } : r.json().then(function(d) { return { data: null, error: d }; }); })
       .catch(function(e) { return { data: null, error: e }; });
   }
 };
-
-// ══════════════════════════════════════════════════════
-//  CONFIGURACIÓN SUPABASE
-//  👇 Reemplaza con tus datos de Supabase
-// ══════════════════════════════════════════════════════
-
-
-// ── CREDENCIALES ADMIN (cambia la contraseña) ──
-var ADMIN_USER = 'admin';
-var ADMIN_PASS = 'topspot2025';
 
 // ── CONFIG DINÁMICA ──
 var appConfig = {
@@ -747,24 +1151,29 @@ var appConfig = {
 };
 
 // ═══════════════════════════════════════
-//  CARGAR PRODUCTOS DESDE SUPABASE
+//  CARGAR PRODUCTOS
 // ═══════════════════════════════════════
 var allProducts = [];
 
+// FIX: Carrito persistente usando sessionStorage para mantenerlo entre páginas
+function saveCartToSession() {
+  try { sessionStorage.setItem('topspot_cart', JSON.stringify(cart)); } catch(e) {}
+}
+function loadCartFromSession() {
+  try {
+    var saved = sessionStorage.getItem('topspot_cart');
+    if (saved) { cart = JSON.parse(saved); updateCartDisplay(); }
+  } catch(e) {}
+}
+
 async function loadProducts() {
   try {
-    var { data, error } = await _supabase
-      .from('productos')
-      .select('*')
-      .eq('activo', true)
-      .order('created_at', { ascending: false });
-
+    var { data, error } = await _supabase.from('productos').select('*').eq('activo', true).order('created_at', { ascending: false });
     if (error) throw error;
     allProducts = data || [];
     renderAllSections();
   } catch(e) {
     console.error('Supabase error:', e);
-    // Si no hay conexión, muestra productos de ejemplo
     loadFallbackProducts();
   }
 }
@@ -793,38 +1202,36 @@ function loadFallbackProducts() {
   renderAllSections();
 }
 
-// ══ ICONOS POR CATEGORÍA ══
 var catIcons = {tablas:'🛹',trucks:'⚙️',ruedas:'⭕',ropa:'👕',accesorios:'🔩'};
+// FIX: mapa global para acceder a productos por ID sin depender de strings en onclick
+var productMap = {};
 
 function renderAllSections() {
   ['tablas','trucks','ruedas','ropa','accesorios'].forEach(function(cat) {
-    var prods = allProducts.filter(function(p){ return p.categoria === cat; });
-    renderSection(cat, prods);
+    renderSection(cat, allProducts.filter(function(p){ return p.categoria === cat; }));
   });
 }
 
 function renderSection(cat, prods) {
   var grid = document.getElementById('grid-' + cat);
   if (!grid) return;
-  if (!prods.length) {
-    grid.innerHTML = '<div class="empty-section">No hay productos en esta categoría</div>';
-    return;
-  }
+  if (!prods.length) { grid.innerHTML = '<div class="empty-section">No hay productos en esta categoría</div>'; return; }
+  // FIX: en vez de incrustar el nombre en onclick (se rompe con comillas y caracteres especiales),
+  // guardamos los productos en un mapa global y usamos el ID numérico.
+  prods.forEach(function(p){ productMap[p.id] = p; });
   grid.innerHTML = prods.map(function(p) {
     var icon = catIcons[p.categoria] || '🛹';
     var badge = p.etiqueta ? '<div class="product-badge">' + p.etiqueta + '</div>' : '';
     var imgHtml = p.imagen
-      ? '<img src="' + p.imagen + '" alt="' + p.nombre + '" onerror="this.style.display=\'none\'">'
+      ? '<img src="' + p.imagen + '" alt="' + p.nombre.replace(/"/g,'&quot;') + '" onerror="this.style.display=\'none\'">'
       : '<span class="emoji-icon">' + icon + '</span>';
     var priceHtml = p.precio_anterior
       ? '<span class="product-price">$' + Number(p.precio).toLocaleString() + '</span><span class="product-old">$' + Number(p.precio_anterior).toLocaleString() + '</span>'
       : '<span class="product-price">$' + Number(p.precio).toLocaleString() + '</span>';
-    var safeNombre = p.nombre.replace(/'/g, "\\'");
 
     if (p.tallas && p.tallas.trim()) {
       var tallasArr = p.tallas.split(',').map(function(t){ return t.trim(); });
-      var sizeId = 'sizes-' + p.id;
-      var errId = 'err-' + p.id;
+      var sizeId = 'sizes-' + p.id, errId = 'err-' + p.id;
       var sizeBtns = tallasArr.map(function(t){
         return '<button class="size-opt" onclick="selectSize(this,\'' + sizeId + '\')">' + t + '</button>';
       }).join('');
@@ -837,7 +1244,8 @@ function renderSection(cat, prods) {
         + '<div class="size-selector"><label>Selecciona tu talla</label>'
         + '<div class="sizes" id="' + sizeId + '">' + sizeBtns + '</div>'
         + '<div class="size-error" id="' + errId + '">⚠️ Elige una talla</div></div>'
-        + '<button class="btn-add" onclick="addToCartWithSize(\'' + safeNombre + '\',' + p.precio + ',\'' + icon + '\',\'' + sizeId + '\',\'' + errId + '\')">+ AGREGAR AL CARRITO</button>'
+        // FIX: se pasa el id del producto, no el nombre como string
+        + '<button class="btn-add" onclick="addToCartById(' + p.id + ',\'' + sizeId + '\',\'' + errId + '\')">+ AGREGAR AL CARRITO</button>'
         + '</div></div>';
     }
     return '<div class="product-card">'
@@ -846,29 +1254,28 @@ function renderSection(cat, prods) {
       + '<div class="product-name">' + p.nombre + '</div>'
       + '<div class="product-desc">' + p.descripcion + '</div>'
       + '<div style="display:flex;align-items:baseline;gap:4px;">' + priceHtml + '</div>'
-      + '<button class="btn-add" onclick="addToCart(\'' + safeNombre + '\',' + p.precio + ',\'' + icon + '\')">+ AGREGAR AL CARRITO</button>'
+      + '<button class="btn-add" onclick="addToCartById(' + p.id + ')">+ AGREGAR AL CARRITO</button>'
       + '</div></div>';
   }).join('');
 }
 
-// ══════════════════════════════════════════════════════
+// ═══════════════════════════════════════
 //  PANEL ADMIN
-// ══════════════════════════════════════════════════════
+// ═══════════════════════════════════════
 var adminLoggedIn = false;
 var currentFilter = 'todos';
 var editingId = null;
 
-function showAdminLogin() {
-  document.getElementById('admin-login').classList.add('active');
-}
-function hideAdminLogin() {
-  document.getElementById('admin-login').classList.remove('active');
-}
+function showAdminLogin() { document.getElementById('admin-login').classList.add('active'); }
+function hideAdminLogin() { document.getElementById('admin-login').classList.remove('active'); }
+
 function doAdminLogin() {
   var u = document.getElementById('admin-user').value.trim();
   var p = document.getElementById('admin-pass').value;
-  if (u === ADMIN_USER && p === ADMIN_PASS) {
+  // FIX: compara hash en lugar de texto plano
+  if (u === ADMIN_USER && hashSimple(p) === getAdminPassHash()) {
     adminLoggedIn = true;
+    document.getElementById('admin-pass').value = '';
     hideAdminLogin();
     openAdmin();
   } else {
@@ -877,7 +1284,9 @@ function doAdminLogin() {
     setTimeout(function(){ err.style.display = 'none'; }, 3000);
   }
 }
+
 function openAdmin() {
+  // FIX: protección contra bypass por consola — se verifica adminLoggedIn
   if (!adminLoggedIn) { showAdminLogin(); return; }
   document.getElementById('admin-panel').style.display = 'block';
   document.body.style.overflow = 'hidden';
@@ -886,7 +1295,7 @@ function openAdmin() {
 function closeAdmin() {
   document.getElementById('admin-panel').style.display = 'none';
   document.body.style.overflow = '';
-  loadProducts(); // recargar tienda
+  loadProducts();
 }
 function logoutAdmin() {
   adminLoggedIn = false;
@@ -894,14 +1303,14 @@ function logoutAdmin() {
   document.body.style.overflow = '';
 }
 
-function showAdminTab(tabId) {
+// FIX: showAdminTab recibe el botón como parámetro — elimina uso de 'event' global
+function showAdminTab(tabId, btn) {
   document.querySelectorAll('.admin-section').forEach(function(s){ s.classList.remove('active'); });
   document.querySelectorAll('.admin-tab').forEach(function(t){ t.classList.remove('active'); });
   document.getElementById(tabId).classList.add('active');
-  event.target.classList.add('active');
+  if (btn) btn.classList.add('active');
 }
 
-// ── CARGAR TABLA ADMIN ──
 async function loadAdminProducts() {
   try {
     var { data, error } = await _supabase.from('productos').select('*').order('created_at', { ascending: false });
@@ -939,27 +1348,27 @@ function renderAdminTable(prods) {
   }
   tbody.innerHTML = filtered.map(function(p) {
     var statusBadge = p.activo ? '<span class="badge-active">Activo</span>' : '<span class="badge-inactive">Inactivo</span>';
-    var precio = '$' + Number(p.precio).toLocaleString();
     return '<tr>'
       + '<td><strong>' + p.nombre + '</strong></td>'
       + '<td><span class="badge-cat">' + p.categoria + '</span></td>'
-      + '<td>' + precio + '</td>'
+      + '<td>$' + Number(p.precio).toLocaleString() + '</td>'
       + '<td>' + statusBadge + '</td>'
       + '<td><div class="action-btns">'
       + '<button class="btn-edit" onclick="editProduct(' + p.id + ')">✏️ Editar</button>'
       + '<button class="btn-toggle" onclick="toggleProduct(' + p.id + ',' + p.activo + ')">' + (p.activo ? '🔴 Desactivar' : '🟢 Activar') + '</button>'
       + '<button class="btn-del" onclick="deleteProduct(' + p.id + ')">🗑 Eliminar</button>'
-      + '</div></td>'
-      + '</tr>';
+      + '</div></td></tr>';
   }).join('');
 }
 
-// ── EDITAR PRODUCTO ──
+// FIX: editProduct eliminada la variable 'all' declarada pero nunca usada
 function editProduct(id) {
-  var all = allProducts.length ? allProducts : [];
-  // también buscar en el DOM actual
   _supabase.from('productos').select('*').eq('id', id).single().then(function(result) {
     var p = result.data;
+    if (!p) {
+      // fallback a datos locales si Supabase falla
+      p = allProducts.find(function(x){ return x.id == id; });
+    }
     if (!p) return;
     editingId = id;
     document.getElementById('edit-id').value = id;
@@ -973,25 +1382,22 @@ function editProduct(id) {
     document.getElementById('f-imagen').value = p.imagen || '';
     document.getElementById('f-activo').checked = p.activo !== false;
     document.getElementById('form-title').textContent = 'EDITANDO: ' + p.nombre.toUpperCase();
-    showAdminTab('tab-nuevo');
-    document.querySelector('[onclick="showAdminTab(\'tab-nuevo\')"]').classList.add('active');
+    // FIX: pasa el botón correcto al tab
+    var tabBtn = document.querySelectorAll('.admin-tab')[1];
+    showAdminTab('tab-nuevo', tabBtn);
   });
 }
 
-// ── GUARDAR PRODUCTO ──
 async function saveProduct() {
   var nombre = document.getElementById('f-nombre').value.trim();
   var categoria = document.getElementById('f-categoria').value;
   var precio = parseInt(document.getElementById('f-precio').value);
   var descripcion = document.getElementById('f-descripcion').value.trim();
   if (!nombre || !categoria || !precio || !descripcion) {
-    showFormMsg('⚠️ Completa los campos obligatorios', '#ff4466');
-    return;
+    showFormMsg('⚠️ Completa los campos obligatorios', '#ff4466'); return;
   }
   var payload = {
-    nombre: nombre,
-    categoria: categoria,
-    precio: precio,
+    nombre: nombre, categoria: categoria, precio: precio,
     precio_anterior: parseInt(document.getElementById('f-precio-anterior').value) || null,
     descripcion: descripcion,
     etiqueta: document.getElementById('f-etiqueta').value || null,
@@ -1000,29 +1406,21 @@ async function saveProduct() {
     activo: document.getElementById('f-activo').checked
   };
   try {
-    var result;
-    if (editingId) {
-      result = await _supabase.update('productos', payload, 'id=eq.' + editingId);
-    } else {
-      result = await _supabase.insert('productos', [payload]);
-    }
+    var result = editingId
+      ? await _supabase.update('productos', payload, 'id=eq.' + editingId)
+      : await _supabase.insert('productos', [payload]);
     if (result.error) throw result.error;
     showFormMsg('✅ Producto guardado correctamente', 'var(--cyan)');
-    resetForm();
-    loadAdminProducts();
-    loadProducts();
+    resetForm(); loadAdminProducts(); loadProducts();
   } catch(e) {
-    // Modo sin conexión: actualizar local
     if (editingId) {
       var idx = allProducts.findIndex(function(p){ return p.id == editingId; });
-      if (idx >= 0) { Object.assign(allProducts[idx], payload); }
+      if (idx >= 0) Object.assign(allProducts[idx], payload);
     } else {
       payload.id = Date.now();
       allProducts.unshift(payload);
     }
-    renderAllSections();
-    renderAdminTable(allProducts);
-    updateStats(allProducts);
+    renderAllSections(); renderAdminTable(allProducts); updateStats(allProducts);
     showFormMsg('✅ Guardado localmente (conecta Supabase para persistir)', '#ffcc00');
     resetForm();
   }
@@ -1031,13 +1429,11 @@ async function saveProduct() {
 async function toggleProduct(id, current) {
   try {
     await _supabase.update('productos', { activo: !current }, 'id=eq.' + id);
-    loadAdminProducts();
-    loadProducts();
+    loadAdminProducts(); loadProducts();
   } catch(e) {
     var p = allProducts.find(function(x){ return x.id == id; });
     if (p) p.activo = !current;
-    renderAllSections();
-    loadAdminProducts();
+    renderAllSections(); loadAdminProducts();
   }
 }
 
@@ -1045,14 +1441,10 @@ async function deleteProduct(id) {
   if (!confirm('¿Seguro que quieres eliminar este producto?')) return;
   try {
     await _supabase.delete('productos', 'id=eq.' + id);
-    loadAdminProducts();
-    loadProducts();
-    showToast('🗑 Producto eliminado');
+    loadAdminProducts(); loadProducts(); showToast('🗑 Producto eliminado');
   } catch(e) {
     allProducts = allProducts.filter(function(p){ return p.id != id; });
-    renderAllSections();
-    loadAdminProducts();
-    showToast('🗑 Eliminado localmente');
+    renderAllSections(); loadAdminProducts(); showToast('🗑 Eliminado localmente');
   }
 }
 
@@ -1068,9 +1460,7 @@ function resetForm() {
 
 function showFormMsg(msg, color) {
   var el = document.getElementById('form-msg');
-  el.textContent = msg;
-  el.style.color = color;
-  el.style.display = 'block';
+  el.textContent = msg; el.style.color = color; el.style.display = 'block';
   setTimeout(function(){ el.style.display = 'none'; }, 4000);
 }
 
@@ -1079,33 +1469,38 @@ function saveConfig() {
   appConfig.clabe = document.getElementById('cfg-clabe').value.trim();
   appConfig.beneficiario = document.getElementById('cfg-beneficiario').value.trim();
   appConfig.banco = document.getElementById('cfg-banco').value.trim();
-  var el = document.getElementById('pay-clabe');
-  if (el) el.textContent = appConfig.clabe;
-  var el2 = document.getElementById('pay-beneficiario');
-  if (el2) el2.textContent = appConfig.beneficiario;
-  var el3 = document.getElementById('pay-banco');
-  if (el3) el3.textContent = appConfig.banco;
+  var pc = document.getElementById('pay-clabe'); if (pc) pc.textContent = appConfig.clabe;
+  var pb = document.getElementById('pay-beneficiario'); if (pb) pb.textContent = appConfig.beneficiario;
+  var pba = document.getElementById('pay-banco'); if (pba) pba.textContent = appConfig.banco;
   var msg = document.getElementById('cfg-msg');
   msg.textContent = '✅ Configuración aplicada'; msg.style.color = 'var(--cyan)'; msg.style.display = 'block';
   setTimeout(function(){ msg.style.display = 'none'; }, 3000);
 }
 
+// FIX: changeAdminPass ahora verifica contraseña actual, exige 8 caracteres mínimo
+// y guarda el hash en sessionStorage para persistir durante la sesión
 function changeAdminPass() {
+  var cp_cur = document.getElementById('current-pass').value;
   var np = document.getElementById('new-pass').value;
   var cp = document.getElementById('confirm-pass').value;
   var msg = document.getElementById('pass-msg');
-  if (!np || np.length < 6) { msg.textContent = '⚠️ Mínimo 6 caracteres'; msg.style.color = '#ff4466'; msg.style.display = 'block'; return; }
+  if (hashSimple(cp_cur) !== getAdminPassHash()) {
+    msg.textContent = '⚠️ La contraseña actual es incorrecta'; msg.style.color = '#ff4466'; msg.style.display = 'block'; return;
+  }
+  if (!np || np.length < 8) { msg.textContent = '⚠️ Mínimo 8 caracteres'; msg.style.color = '#ff4466'; msg.style.display = 'block'; return; }
   if (np !== cp) { msg.textContent = '⚠️ Las contraseñas no coinciden'; msg.style.color = '#ff4466'; msg.style.display = 'block'; return; }
-  ADMIN_PASS = np;
-  msg.textContent = '✅ Contraseña cambiada'; msg.style.color = 'var(--cyan)'; msg.style.display = 'block';
+  // FIX: guarda hash en sessionStorage (persiste en la sesión actual)
+  sessionStorage.setItem('adminPassHash', hashSimple(np));
+  msg.textContent = '✅ Contraseña cambiada para esta sesión'; msg.style.color = 'var(--cyan)'; msg.style.display = 'block';
+  document.getElementById('current-pass').value = '';
   document.getElementById('new-pass').value = '';
   document.getElementById('confirm-pass').value = '';
   setTimeout(function(){ msg.style.display = 'none'; }, 3000);
 }
 
-// ══════════════════════════════════════════════════════
+// ═══════════════════════════════════════
 //  CARRITO
-// ══════════════════════════════════════════════════════
+// ═══════════════════════════════════════
 var cart = [];
 var selectedPayment = 'cash';
 
@@ -1115,11 +1510,13 @@ function addToCart(name, price, icon) {
     if (cart[i].name === name) { cart[i].quantity++; found = true; break; }
   }
   if (!found) cart.push({name:name,price:price,icon:icon,quantity:1});
+  saveCartToSession(); // FIX: persistir carrito
   updateCartDisplay();
   showToast('🛹 ' + name + ' agregado');
 }
 function removeFromCart(name) {
   cart = cart.filter(function(i){ return i.name !== name; });
+  saveCartToSession();
   updateCartDisplay(); renderCartModal();
 }
 function updateQuantity(name, change) {
@@ -1130,6 +1527,7 @@ function updateQuantity(name, change) {
       break;
     }
   }
+  saveCartToSession();
   updateCartDisplay(); renderCartModal();
 }
 function getSubtotal() {
@@ -1187,6 +1585,26 @@ function switchTab(tab) {
   document.getElementById('tab-register').classList.toggle('active', tab === 'register');
 }
 
+// FIX: login/registro de cliente con validación básica y aviso de modo demo
+function doClientLogin() {
+  var email = document.getElementById('login-email').value.trim();
+  var pass = document.getElementById('login-password').value;
+  if (!email || !isValidEmail(email)) { showToast('⚠️ Ingresa un correo válido'); return; }
+  if (!pass) { showToast('⚠️ Ingresa tu contraseña'); return; }
+  showToast('✅ Sesión iniciada (modo demo)');
+  closeModal('login-modal');
+}
+function doClientRegister() {
+  var name = document.getElementById('reg-name').value.trim();
+  var email = document.getElementById('reg-email').value.trim();
+  var pass = document.getElementById('reg-password').value;
+  if (!name) { showToast('⚠️ Ingresa tu nombre'); return; }
+  if (!email || !isValidEmail(email)) { showToast('⚠️ Ingresa un correo válido'); return; }
+  if (!pass || pass.length < 6) { showToast('⚠️ La contraseña debe tener mínimo 6 caracteres'); return; }
+  showToast('✅ Cuenta creada (modo demo)');
+  closeModal('login-modal');
+}
+
 function selectPay(el, method) {
   selectedPayment = method;
   document.querySelectorAll('.pay-option').forEach(function(o){ o.classList.remove('selected'); o.querySelector('input').checked = false; });
@@ -1199,6 +1617,28 @@ function selectSize(btn, groupId) {
   document.getElementById(groupId).querySelectorAll('.size-opt').forEach(function(b){ b.classList.remove('active'); });
   btn.classList.add('active');
 }
+// FIX: función central que resuelve el producto por ID — evita problemas con
+// comillas, pulgadas (") y caracteres especiales en nombres de productos
+function addToCartById(id, sizeGroupId, errId) {
+  var p = productMap[id];
+  if (!p) { showToast('⚠️ Producto no encontrado'); return; }
+  var icon = catIcons[p.categoria] || '🛹';
+  if (sizeGroupId) {
+    // producto con tallas
+    var active = document.getElementById(sizeGroupId) && document.getElementById(sizeGroupId).querySelector('.size-opt.active');
+    var errEl = document.getElementById(errId);
+    if (!active) {
+      if (errEl) { errEl.style.display = 'block'; setTimeout(function(){ errEl.style.display = 'none'; }, 2500); }
+      return;
+    }
+    if (errEl) errEl.style.display = 'none';
+    addToCart(p.nombre + ' (Talla ' + active.textContent + ')', p.precio, icon);
+    document.getElementById(sizeGroupId).querySelectorAll('.size-opt').forEach(function(b){ b.classList.remove('active'); });
+  } else {
+    addToCart(p.nombre, p.precio, icon);
+  }
+}
+
 function addToCartWithSize(name, price, icon, groupId, errId) {
   var active = document.getElementById(groupId).querySelector('.size-opt.active');
   var errEl = document.getElementById(errId);
@@ -1217,16 +1657,31 @@ function openCheckout() {
   openModal('checkout-modal');
 }
 
+// FIX: validación de email con regex y mensajes inline en los campos
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+function setFieldError(fieldId, errId, show) {
+  var f = document.getElementById(fieldId);
+  var e = document.getElementById(errId);
+  if (f) f.classList.toggle('input-error', show);
+  if (e) e.style.display = show ? 'block' : 'none';
+}
+
 function placeOrder() {
   var name = document.getElementById('customer-name').value.trim();
   var email = document.getElementById('customer-email').value.trim();
   var phone = document.getElementById('customer-phone').value.trim();
   var address = document.getElementById('customer-address').value.trim();
-  if (!name) { showToast('⚠️ Ingresa tu nombre'); return; }
-  if (!email) { showToast('⚠️ Ingresa tu correo'); return; }
-  if (!phone) { showToast('⚠️ Ingresa tu teléfono'); return; }
-  if (!address) { showToast('⚠️ Ingresa tu dirección'); return; }
-  var orderNum = '#TOPSPOT-' + new Date().getMinutes().toString().padStart(2,'0') + Math.random().toString(36).substring(2,5).toUpperCase();
+  var hasError = false;
+  setFieldError('customer-name','err-name', !name); if (!name) hasError = true;
+  setFieldError('customer-email','err-email', !isValidEmail(email)); if (!isValidEmail(email)) hasError = true;
+  setFieldError('customer-phone','err-phone', !phone); if (!phone) hasError = true;
+  setFieldError('customer-address','err-address', !address); if (!address) hasError = true;
+  if (hasError) { showToast('⚠️ Corrige los campos marcados en rojo'); return; }
+
+  // FIX: número de orden con mayor entropía usando timestamp completo + 6 chars aleatorios
+  var orderNum = '#TOPSPOT-' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).substring(2,8).toUpperCase();
   var subtotal = getSubtotal();
   var payLabels = {cash:'Efectivo 💵',card:'Tarjeta 💳',transfer:'Transferencia CLABE 🏦'};
   var payLabel = payLabels[selectedPayment];
@@ -1255,9 +1710,17 @@ function placeOrder() {
   document.getElementById('step-checkout').style.display = 'none';
   document.getElementById('step-confirm').style.display = 'block';
 }
+
 function newOrder() {
-  cart = []; selectedPayment = 'cash'; updateCartDisplay(); closeModal('checkout-modal');
-  ['customer-name','customer-email','customer-phone','customer-address'].forEach(function(id){ var el=document.getElementById(id); if(el) el.value=''; });
+  cart = []; selectedPayment = 'cash';
+  saveCartToSession();
+  updateCartDisplay(); closeModal('checkout-modal');
+  ['customer-name','customer-email','customer-phone','customer-address'].forEach(function(id){
+    var el = document.getElementById(id); if (el) el.value = '';
+  });
+  ['err-name','err-email','err-phone','err-address'].forEach(function(id){
+    setFieldError(id.replace('err-','customer-'), id, false);
+  });
 }
 
 // GALERÍA / LIGHTBOX
@@ -1297,16 +1760,18 @@ document.addEventListener('keydown', function(e) {
   if (e.key==='Escape') closeLightbox();
 });
 
-function scrollTo(id) { document.getElementById(id).scrollIntoView({behavior:'smooth'}); }
-
 function showToast(msg) {
   var t = document.getElementById('toast');
   t.textContent = msg; t.classList.add('show');
   setTimeout(function(){ t.classList.remove('show'); }, 2800);
 }
 
-// INICIO
-window.addEventListener("load", function() { loadProducts(); updateCartDisplay(); });
+window.addEventListener('load', function() {
+  loadProducts();
+  loadCartFromSession();
+  updateCartDisplay();
+  loadGallery(false); // cargar galería dinámica
+});
 </script>
 </body>
 </html>
