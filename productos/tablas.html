@@ -561,95 +561,89 @@ footer{background:#080808;border-top:1px solid rgba(0,255,204,.15);padding:3rem 
 
 
 <script>
-var SUPABASE_URL = 'https://kvialqdfvgtokvfmousm.supabase.co';
-var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt2aWFscWRmdmd0b2t2Zm1vdXNtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5MzEzNDUsImV4cCI6MjA4NzUwNzM0NX0.INLcKkl7OJWEuwDGLmkuQmCQ2etbZ4vP5FiQuqhT8K';
-var catIcons = {tablas:'🛹',trucks:'⚙️',ruedas:'⭕',ropa:'👕',accesorios:'🔩'};
-var cart = [];
-var selectedPayment = 'cash';
-var ADMIN_USER = 'admin';
-var ADMIN_PASS = 'topspot2025';
-var adminLoggedIn = false;
-var editingId = null;
-var appConfig = {whatsapp:'5618426883',clabe:'012820004987654321',beneficiario:'TOPSPOT S.A. DE C.V.',banco:'BBVA Bancomer'};
+var SUPABASE_URL='https://kvialqdfvgtokvfmousm.supabase.co';
+var SUPABASE_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt2aWFscWRmdmd0b2t2Zm1vdXNtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5MzEzNDUsImV4cCI6MjA4NzUwNzM0NX0.INLcKkl7OJWEuwDGLmkuQmCQ2etbZ4vP5FiQuqhT8K';
+var FALLBACK=[{"id": 1, "nombre": "Tabla SK8 Classic 8.0", "categoria": "tablas", "precio": 850, "precio_anterior": null, "descripcion": "Maple canadiense 7 capas, shape clásico.", "etiqueta": "POPULAR", "tallas": null, "imagen": null}, {"id": 2, "nombre": "Tabla Street King 8.25", "categoria": "tablas", "precio": 980, "precio_anterior": null, "descripcion": "Diseño urbano agresivo, refuerzo en nose y tail.", "etiqueta": null, "tallas": null, "imagen": null}, {"id": 3, "nombre": "Tabla Cruiser Longboard 32", "categoria": "tablas", "precio": 1100, "precio_anterior": 1350, "descripcion": "Perfecta para la ciudad. Estable y elegante.", "etiqueta": null, "tallas": null, "imagen": null}, {"id": 4, "nombre": "Tabla Park Pro 8.5", "categoria": "tablas", "precio": 1050, "precio_anterior": null, "descripcion": "Para rampas y park. Concave profundo.", "etiqueta": "NUEVO", "tallas": null, "imagen": null}];
+var catIcons={tablas:'🛹',trucks:'⚙️',ruedas:'⭕',ropa:'👕',accesorios:'🔩'};
+var cart=[];var selectedPayment='cash';
+var ADMIN_USER='admin';var ADMIN_PASS='topspot2025';var adminLoggedIn=false;
+var appConfig={whatsapp:'5618426883',clabe:'012820004987654321',beneficiario:'TOPSPOT S.A. DE C.V.',banco:'BBVA Bancomer'};
 
-// ── CARGAR PRODUCTOS ──
-window.addEventListener('load', function() {
-  fetch(SUPABASE_URL + '/rest/v1/productos?activo=eq.true&categoria=eq.tablas&order=created_at.desc&select=*', {
-    headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
+window.addEventListener('load',function(){
+  fetch(SUPABASE_URL+'/rest/v1/productos?activo=eq.true&categoria=eq.tablas&order=created_at.desc&select=*',{
+    headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY}
   })
-  .then(function(r) { return r.json(); })
-  .then(function(data) {
-    if (!Array.isArray(data) || data.length === 0) throw new Error('vacio');
-    renderGrid(data);
+  .then(function(r){return r.json();})
+  .then(function(data){
+    // Si Supabase devuelve array con datos, usarlos; si no, usar fallback
+    if(Array.isArray(data)&&data.length>0){
+      renderGrid(data);
+    }else{
+      renderGrid(FALLBACK);
+    }
   })
-  .catch(function() {
-    renderGrid([{"id": 1, "nombre": "Tabla SK8 Classic 8.0", "categoria": "tablas", "precio": 850, "precio_anterior": null, "descripcion": "Maple canadiense 7 capas.", "etiqueta": "POPULAR", "tallas": null}, {"id": 2, "nombre": "Tabla Street King 8.25", "categoria": "tablas", "precio": 980, "precio_anterior": null, "descripcion": "Diseño urbano agresivo.", "etiqueta": null, "tallas": null}, {"id": 3, "nombre": "Tabla Park Pro 8.5", "categoria": "tablas", "precio": 1050, "precio_anterior": null, "descripcion": "Para rampas y park.", "etiqueta": "NUEVO", "tallas": null}]);
+  .catch(function(e){
+    console.log('Usando productos locales');
+    renderGrid(FALLBACK);
   });
   updateCartDisplay();
 });
 
-function renderGrid(prods) {
-  var grid = document.getElementById('grid-tablas');
-  if (!prods.length) { grid.innerHTML = '<div class="empty-section">No hay productos aún</div>'; return; }
-  grid.innerHTML = prods.map(function(p) {
-    var icon = catIcons[p.categoria] || '🛹';
-    var badge = p.etiqueta ? '<div class="product-badge">' + p.etiqueta + '</div>' : '';
-    var img = p.imagen ? '<img src="' + p.imagen + '" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">' : '<span style="font-size:5rem">' + icon + '</span>';
-    var priceHtml = p.precio_anterior
-      ? '<span class="product-price">$' + Number(p.precio).toLocaleString() + '</span><span class="product-old">$' + Number(p.precio_anterior).toLocaleString() + '</span>'
-      : '<span class="product-price">$' + Number(p.precio).toLocaleString() + '</span>';
-    var safeNombre = (p.nombre||'').replace(/'/g,"\'");
-    if (p.tallas && p.tallas.trim()) {
-      var sid = 'sz-' + p.id, eid = 'er-' + p.id;
-      var btns = p.tallas.split(',').map(function(t) {
-        return '<button class="size-opt" onclick="selectSize(this,'' + sid + '')">' + t.trim() + '</button>';
-      }).join('');
-      return '<div class="product-card"><div class="product-img" style="position:relative">' + img + badge + '</div>'
-        + '<div class="product-info"><div class="product-name">' + p.nombre + '</div>'
-        + '<div class="product-desc">' + (p.descripcion||'') + '</div>'
-        + '<div style="display:flex;align-items:baseline;gap:4px">' + priceHtml + '</div>'
-        + '<div class="size-selector"><label>Talla</label><div class="sizes" id="' + sid + '">' + btns + '</div>'
-        + '<div class="size-error" id="' + eid + '">⚠️ Elige una talla</div></div>'
-        + '<button class="btn-add" onclick="addToCartWithSize('' + safeNombre + '',' + p.precio + ','' + icon + '','' + sid + '','' + eid + '')">+ AGREGAR AL CARRITO</button>'
-        + '</div></div>';
+function renderGrid(prods){
+  var grid=document.getElementById('grid-tablas');
+  if(!prods||!prods.length){grid.innerHTML='<div class="empty-section">No hay productos aún</div>';return;}
+  grid.innerHTML=prods.map(function(p){
+    var ic=catIcons[p.categoria]||'🛹';
+    var badge=p.etiqueta?'<div class="product-badge">'+p.etiqueta+'</div>':'';
+    var imgHtml=p.imagen
+      ?'<img src="'+p.imagen+'" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0" onerror="this.style.display='none'">'
+      :'<span style="font-size:5rem">'+ic+'</span>';
+    var priceHtml=p.precio_anterior
+      ?'<span class="product-price">$'+Number(p.precio).toLocaleString()+'</span><span class="product-old">$'+Number(p.precio_anterior).toLocaleString()+'</span>'
+      :'<span class="product-price">$'+Number(p.precio).toLocaleString()+'</span>';
+    var sn=(p.nombre||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+    if(p.tallas&&p.tallas.trim()){
+      var sid='sz-'+p.id,eid='er-'+p.id;
+      var btns=p.tallas.split(',').map(function(t){return'<button class="size-opt" onclick="selectSize(this,\''+sid+'\')">'+t.trim()+'</button>';}).join('');
+      return'<div class="product-card"><div class="product-img" style="position:relative">'+imgHtml+badge+'</div>'
+        +'<div class="product-info"><div class="product-name">'+p.nombre+'</div>'
+        +'<div class="product-desc">'+(p.descripcion||'')+'</div>'
+        +'<div style="display:flex;align-items:baseline;gap:4px">'+priceHtml+'</div>'
+        +'<div class="size-selector"><label>Talla</label><div class="sizes" id="'+sid+'">'+btns+'</div>'
+        +'<div class="size-error" id="'+eid+'">⚠️ Elige una talla</div></div>'
+        +'<button class="btn-add" onclick="addToCartWithSize(\''+sn+'\','+p.precio+',\''+ic+'\',\''+sid+'\',\''+eid+'\')">+ AGREGAR AL CARRITO</button>'
+        +'</div></div>';
     }
-    return '<div class="product-card"><div class="product-img" style="position:relative">' + img + badge + '</div>'
-      + '<div class="product-info"><div class="product-name">' + p.nombre + '</div>'
-      + '<div class="product-desc">' + (p.descripcion||'') + '</div>'
-      + '<div style="display:flex;align-items:baseline;gap:4px">' + priceHtml + '</div>'
-      + '<button class="btn-add" onclick="addToCart('' + safeNombre + '',' + p.precio + ','' + icon + '')">+ AGREGAR AL CARRITO</button>'
-      + '</div></div>';
+    return'<div class="product-card"><div class="product-img" style="position:relative">'+imgHtml+badge+'</div>'
+      +'<div class="product-info"><div class="product-name">'+p.nombre+'</div>'
+      +'<div class="product-desc">'+(p.descripcion||'')+'</div>'
+      +'<div style="display:flex;align-items:baseline;gap:4px">'+priceHtml+'</div>'
+      +'<button class="btn-add" onclick="addToCart(\''+sn+'\','+p.precio+',\''+ic+'\')">+ AGREGAR AL CARRITO</button>'
+      +'</div></div>';
   }).join('');
 }
 
-// ── CARRITO ──
 function addToCart(name,price,icon){var f=false;for(var i=0;i<cart.length;i++){if(cart[i].name===name){cart[i].quantity++;f=true;break;}}if(!f)cart.push({name:name,price:price,icon:icon,quantity:1});updateCartDisplay();showToast('🛹 '+name+' agregado');}
 function removeFromCart(name){cart=cart.filter(function(i){return i.name!==name;});updateCartDisplay();renderCartModal();}
 function updateQuantity(name,change){for(var i=0;i<cart.length;i++){if(cart[i].name===name){cart[i].quantity+=change;if(cart[i].quantity<=0)cart.splice(i,1);break;}}updateCartDisplay();renderCartModal();}
 function getSubtotal(){return cart.reduce(function(s,i){return s+i.price*i.quantity;},0);}
-function updateCartDisplay(){var count=cart.reduce(function(s,i){return s+i.quantity;},0);var sub=getSubtotal();document.getElementById('nav-cart-count').textContent=count;document.getElementById('float-cart-count').textContent=count;var d1=document.getElementById('cart-total-display');var d2=document.getElementById('checkout-total');if(d1)d1.textContent='$'+sub.toLocaleString();if(d2)d2.textContent='$'+sub.toLocaleString();}
-function renderCartModal(){var c=document.getElementById('cart-items-container');if(!c)return;if(!cart.length){c.innerHTML='<p style="color:var(--muted);text-align:center;padding:2rem 0;">Tu carrito está vacío 🛒</p>';return;}c.innerHTML=cart.map(function(item){var sn=item.name.replace(/\\/g,'\\\\').replace(/'/g,"\\'");return'<div class="cart-item"><div class="cart-item-icon">'+item.icon+'</div><div class="cart-item-info"><div class="cart-item-name">'+item.name+'</div><div style="display:flex;align-items:center;gap:8px;margin-top:5px;"><button onclick="updateQuantity(''+sn+'',-1)" style="background:rgba(0,255,204,.1);border:1px solid var(--cyan);color:var(--cyan);width:26px;height:26px;border-radius:4px;cursor:pointer;font-size:1rem;font-weight:700">−</button><span style="color:#fff;font-weight:700;min-width:18px;text-align:center">'+item.quantity+'</span><button onclick="updateQuantity(''+sn+'',1)" style="background:rgba(0,255,204,.1);border:1px solid var(--cyan);color:var(--cyan);width:26px;height:26px;border-radius:4px;cursor:pointer;font-size:1rem;font-weight:700">+</button></div><div class="cart-item-price" style="margin-top:4px">$'+(item.price*item.quantity).toLocaleString()+'</div></div><button class="cart-item-remove" onclick="removeFromCart(''+sn+'')">✕</button></div>';}).join('');}
+function updateCartDisplay(){var count=cart.reduce(function(s,i){return s+i.quantity;},0);var sub=getSubtotal();['nav-cart-count','float-cart-count'].forEach(function(id){var el=document.getElementById(id);if(el)el.textContent=count;});var d1=document.getElementById('cart-total-display');var d2=document.getElementById('checkout-total');if(d1)d1.textContent='$'+sub.toLocaleString();if(d2)d2.textContent='$'+sub.toLocaleString();}
+function renderCartModal(){var c=document.getElementById('cart-items-container');if(!c)return;if(!cart.length){c.innerHTML='<p style="color:var(--muted);text-align:center;padding:2rem 0;">Tu carrito está vacío 🛒</p>';return;}c.innerHTML=cart.map(function(item){var sn=item.name.replace(/\\/g,'\\\\').replace(/'/g,"\\'");return'<div class="cart-item"><div class="cart-item-icon">'+item.icon+'</div><div class="cart-item-info"><div class="cart-item-name">'+item.name+'</div><div style="display:flex;align-items:center;gap:8px;margin-top:5px"><button onclick="updateQuantity(''+sn+'',-1)" style="background:rgba(0,255,204,.1);border:1px solid var(--cyan);color:var(--cyan);width:26px;height:26px;border-radius:4px;cursor:pointer;font-weight:700">−</button><span style="color:#fff;font-weight:700;min-width:18px;text-align:center">'+item.quantity+'</span><button onclick="updateQuantity(''+sn+'',1)" style="background:rgba(0,255,204,.1);border:1px solid var(--cyan);color:var(--cyan);width:26px;height:26px;border-radius:4px;cursor:pointer;font-weight:700">+</button></div><div class="cart-item-price">$'+(item.price*item.quantity).toLocaleString()+'</div></div><button class="cart-item-remove" onclick="removeFromCart(''+sn+'')">✕</button></div>';}).join('');}
 function selectSize(btn,gid){document.getElementById(gid).querySelectorAll('.size-opt').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');}
 function addToCartWithSize(name,price,icon,sid,eid){var a=document.getElementById(sid).querySelector('.size-opt.active');if(!a){document.getElementById(eid).style.display='block';setTimeout(function(){document.getElementById(eid).style.display='none';},2500);return;}addToCart(name+' (Talla '+a.textContent+')',price,icon);document.getElementById(sid).querySelectorAll('.size-opt').forEach(function(b){b.classList.remove('active');});}
-
-// ── MODALS ──
 function openModal(id){if(id==='cart-modal')renderCartModal();document.getElementById(id).classList.add('active');document.body.style.overflow='hidden';}
 function closeModal(id){document.getElementById(id).classList.remove('active');document.body.style.overflow='';}
 document.querySelectorAll('.overlay').forEach(function(el){el.addEventListener('click',function(e){if(e.target===el)closeModal(el.id);});});
 function switchTab(t){document.getElementById('login-form').style.display=t==='login'?'block':'none';document.getElementById('register-form').style.display=t==='register'?'block':'none';document.getElementById('tab-login').classList.toggle('active',t==='login');document.getElementById('tab-register').classList.toggle('active',t==='register');}
 function selectPay(el,method){selectedPayment=method;document.querySelectorAll('.pay-option').forEach(function(o){o.classList.remove('selected');o.querySelector('input').checked=false;});el.classList.add('selected');el.querySelector('input').checked=true;document.getElementById('card-fields').style.display=method==='card'?'block':'none';document.getElementById('transfer-info').style.display=method==='transfer'?'block':'none';}
 function openCheckout(){if(!cart.length){showToast('⚠️ Tu carrito está vacío');return;}closeModal('cart-modal');document.getElementById('step-checkout').style.display='block';document.getElementById('step-confirm').style.display='none';updateCartDisplay();openModal('checkout-modal');}
-function placeOrder(){var name=document.getElementById('customer-name').value.trim();var email=document.getElementById('customer-email').value.trim();var phone=document.getElementById('customer-phone').value.trim();var address=document.getElementById('customer-address').value.trim();if(!name){showToast('⚠️ Ingresa tu nombre');return;}if(!email){showToast('⚠️ Ingresa tu correo');return;}if(!phone){showToast('⚠️ Ingresa tu teléfono');return;}if(!address){showToast('⚠️ Ingresa tu dirección');return;}var orderNum='#TOPSPOT-'+Math.random().toString(36).substring(2,7).toUpperCase();var subtotal=getSubtotal();var payLabels={cash:'Efectivo 💵',card:'Tarjeta 💳',transfer:'Transferencia CLABE 🏦'};var itemsLines=cart.map(function(i){return'  • '+i.icon+' '+i.name+' x'+i.quantity+' = $'+(i.price*i.quantity).toLocaleString()+' MXN';}).join('\n');var waMsg='🛹 *NUEVO PEDIDO — TOPSPOT* 🛹\n━━━━━━━━━━━━━━━━━━━━━━\n📋 *Orden:* '+orderNum+'\n👤 *Cliente:* '+name+'\n📱 *Teléfono:* '+phone+'\n📧 *Correo:* '+email+'\n📍 *Dirección:* '+address+'\n━━━━━━━━━━━━━━━━━━━━━━\n🛒 *Productos:*\n'+itemsLines+'\n━━━━━━━━━━━━━━━━━━━━━━\n💰 *TOTAL: $'+subtotal.toLocaleString()+' MXN*\n💳 *Pago:* '+payLabels[selectedPayment]+'\n━━━━━━━━━━━━━━━━━━━━━━\n🏪 TOPSPOT — Plaza de la Tecnología, Santa Marta';document.getElementById('wa-btn').href='https://wa.me/'+appConfig.whatsapp+'?text='+encodeURIComponent(waMsg);document.getElementById('order-number').textContent=orderNum;document.getElementById('order-summary-text').innerHTML='<strong style="color:#fff">'+name+'</strong>, tu pedido fue registrado.<br>Total: <strong style="color:var(--cyan)">$'+subtotal.toLocaleString()+' MXN</strong>';document.getElementById('step-checkout').style.display='none';document.getElementById('step-confirm').style.display='block';}
+function placeOrder(){var name=document.getElementById('customer-name').value.trim();var email=document.getElementById('customer-email').value.trim();var phone=document.getElementById('customer-phone').value.trim();var address=document.getElementById('customer-address').value.trim();if(!name){showToast('⚠️ Ingresa tu nombre');return;}if(!email){showToast('⚠️ Ingresa tu correo');return;}if(!phone){showToast('⚠️ Ingresa tu teléfono');return;}if(!address){showToast('⚠️ Ingresa tu dirección');return;}var orderNum='#TOPSPOT-'+Math.random().toString(36).substring(2,7).toUpperCase();var subtotal=getSubtotal();var payLabels={cash:'Efectivo 💵',card:'Tarjeta 💳',transfer:'Transferencia CLABE 🏦'};var items=cart.map(function(i){return'  • '+i.icon+' '+i.name+' x'+i.quantity+' = $'+(i.price*i.quantity).toLocaleString()+' MXN';}).join('\n');var msg='🛹 *NUEVO PEDIDO — TOPSPOT* 🛹\n━━━━━━━━━━━━━━━━\n📋 '+orderNum+'\n👤 '+name+'\n📱 '+phone+'\n📍 '+address+'\n━━━━━━━━━━━━━━━━\n'+items+'\n━━━━━━━━━━━━━━━━\n💰 TOTAL: $'+subtotal.toLocaleString()+' MXN\n💳 '+payLabels[selectedPayment];document.getElementById('wa-btn').href='https://wa.me/'+appConfig.whatsapp+'?text='+encodeURIComponent(msg);document.getElementById('order-number').textContent=orderNum;document.getElementById('order-summary-text').innerHTML='<strong>'+name+'</strong><br>Total: <strong style="color:var(--cyan)">$'+subtotal.toLocaleString()+' MXN</strong>';document.getElementById('step-checkout').style.display='none';document.getElementById('step-confirm').style.display='block';}
 function newOrder(){cart=[];selectedPayment='cash';updateCartDisplay();closeModal('checkout-modal');}
-
-// ── ADMIN ──
 function showAdminLogin(){document.getElementById('admin-login').classList.add('active');}
 function hideAdminLogin(){document.getElementById('admin-login').classList.remove('active');}
-function doAdminLogin(){var u=document.getElementById('admin-user').value.trim();var p=document.getElementById('admin-pass').value;if(u===ADMIN_USER&&p===ADMIN_PASS){adminLoggedIn=true;hideAdminLogin();window.location.href='../index.html';}else{var e=document.getElementById('admin-error');e.style.display='block';setTimeout(function(){e.style.display='none';},3000);}}
+function doAdminLogin(){var u=document.getElementById('admin-user').value.trim();var pw=document.getElementById('admin-pass').value;if(u===ADMIN_USER&&pw===ADMIN_PASS){adminLoggedIn=true;hideAdminLogin();window.location.href='../index.html#admin';}else{var e=document.getElementById('admin-error');e.style.display='block';setTimeout(function(){e.style.display='none';},3000);}}
 function logoutAdmin(){adminLoggedIn=false;}
 function showAdminTab(){} function closeAdmin(){} function loadAdminProducts(){} function filterAdmin(){} function saveProduct(){} function toggleProduct(){} function deleteProduct(){} function editProduct(){} function resetForm(){} function saveConfig(){} function changeAdminPass(){}
-
-// ── TOAST ──
 function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2800);}
 </script>
 </body>
