@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOPSPOT - Tienda de Skate | Santa Marta</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Bebas+Neue&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--cyan:#00FFCC;--bg:#0a0a0a;--card:#111;--card2:#181818;--text:#fff;--muted:#888;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;overflow-x:hidden;}
+::-webkit-scrollbar{width:6px;}::-webkit-scrollbar-track{background:#111;}::-webkit-scrollbar-thumb{background:var(--cyan);border-radius:3px;}
+
+nav{position:sticky;top:0;z-index:1000;background:rgba(10,10,10,0.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,255,204,0.2);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--cyan);letter-spacing:4px;cursor:pointer;}
+.nav-links{display:flex;gap:1.8rem;list-style:none;}
+.nav-links a{color:var(--text);text-decoration:none;font-weight:600;font-size:.9rem;letter-spacing:1px;text-transform:uppercase;transition:color .2s;}
+.nav-links a:hover{color:var(--cyan);}
+.nav-actions{display:flex;gap:1rem;align-items:center;}
+.btn-login{border:1px solid var(--cyan);color:var(--cyan);background:transparent;padding:8px 20px;border-radius:4px;cursor:pointer;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.9rem;letter-spacing:1px;text-transform:uppercase;transition:all .2s;}
+.btn-login:hover{background:var(--cyan);color:#000;}
+.cart-btn{background:var(--cyan);color:#000;border:none;width:44px;height:44px;border-radius:50%;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;position:relative;transition:transform .2s;}
+.cart-btn:hover{transform:scale(1.1);}
+.cart-count{position:absolute;top:-4px;right:-4px;background:#ff3366;color:#fff;font-size:.7rem;font-weight:700;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+
+.hero{position:relative;height:480px;overflow:hidden;background:linear-gradient(135deg,#0a0a0a 0%,#0d1a15 50%,#0a0a0a 100%);display:flex;align-items:center;padding:3rem;}
+.hero-bg-img{position:absolute;right:0;top:0;height:100%;width:55%;background:linear-gradient(to left,rgba(0,30,20,.7),transparent),url('https://images.unsplash.com/photo-1547447134-cd3f5c716030?w=800&q=80') center/cover;opacity:.4;}
+.hero-content{position:relative;z-index:2;max-width:500px;}
+.hero-eyebrow{color:var(--cyan);font-size:.85rem;letter-spacing:4px;text-transform:uppercase;margin-bottom:.5rem;}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:6rem;line-height:.9;color:var(--text);}
+.hero-title span{color:var(--cyan);}
+.hero-sub{color:var(--muted);margin:1rem 0 2rem;font-size:1.1rem;letter-spacing:1px;}
+.hero-address{color:var(--muted);font-size:.85rem;letter-spacing:1px;margin-top:1.5rem;}
+.hero-address span{color:var(--cyan);}
+.btn-primary{background:var(--cyan);color:#000;border:none;padding:14px 36px;border-radius:4px;cursor:pointer;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;letter-spacing:2px;text-transform:uppercase;transition:all .2s;}
+.btn-primary:hover{background:#fff;transform:translateY(-2px);}
+
+.section{padding:3rem 2rem;}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:3px;color:var(--cyan);margin-bottom:2rem;text-transform:uppercase;}
+.cats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1.2rem;max-width:800px;}
+.cat-card{background:var(--card);border:1px solid rgba(0,255,204,.15);border-radius:12px;padding:1.5rem 1rem;text-align:center;cursor:pointer;transition:all .3s;}
+.cat-card:hover{border-color:var(--cyan);background:rgba(0,255,204,.05);transform:translateY(-4px);}
+.cat-icon{width:60px;height:60px;border:2px solid var(--cyan);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto .8rem;font-size:1.5rem;}
+.cat-label{color:var(--text);font-weight:700;font-size:.85rem;letter-spacing:2px;text-transform:uppercase;}
+
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.5rem;}
+.product-card{background:var(--card);border:1px solid rgba(0,255,204,.1);border-radius:12px;overflow:hidden;transition:all .3s;}
+.product-card:hover{border-color:var(--cyan);transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,.5);}
+.product-img{height:200px;display:flex;align-items:center;justify-content:center;background:var(--card2);position:relative;font-size:5rem;}
+.product-img img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;}
+.product-badge{position:absolute;top:12px;left:12px;background:var(--cyan);color:#000;font-weight:700;font-size:.7rem;letter-spacing:1px;padding:4px 10px;border-radius:3px;z-index:2;}
+.product-info{padding:1.2rem;}
+.product-name{font-weight:700;font-size:1.05rem;letter-spacing:1px;margin-bottom:.3rem;}
+.product-desc{color:var(--muted);font-size:.83rem;margin-bottom:.8rem;line-height:1.4;}
+.product-price{color:var(--cyan);font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:2px;}
+.product-old{color:var(--muted);text-decoration:line-through;font-size:.9rem;margin-left:8px;}
+.size-selector{margin:.8rem 0 .4rem;}
+.size-selector label{display:block;color:var(--muted);font-size:.75rem;letter-spacing:1px;text-transform:uppercase;margin-bottom:.4rem;}
+.sizes{display:flex;flex-wrap:wrap;gap:.4rem;}
+.size-opt{border:1px solid rgba(0,255,204,.25);color:var(--muted);background:transparent;padding:5px 11px;border-radius:4px;cursor:pointer;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.82rem;transition:all .2s;}
+.size-opt:hover{border-color:var(--cyan);color:var(--cyan);}
+.size-opt.active{background:var(--cyan);color:#000;border-color:var(--cyan);}
+.size-error{color:#ff4466;font-size:.78rem;margin-top:.3rem;display:none;letter-spacing:1px;}
+.btn-add{width:100%;background:transparent;border:1px solid var(--cyan);color:var(--cyan);padding:10px;border-radius:4px;cursor:pointer;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.9rem;letter-spacing:2px;margin-top:.8rem;transition:all .2s;text-transform:uppercase;}
+.btn-add:hover{background:var(--cyan);color:#000;}
+
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;}
+@media(max-width:600px){.gallery-grid{grid-template-columns:repeat(2,1fr);}}
+.gallery-item{position:relative;border-radius:10px;overflow:hidden;cursor:pointer;aspect-ratio:4/3;border:1px solid rgba(0,255,204,.08);transition:all .3s;}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.gallery-item:hover img{transform:scale(1.07);}
+.gallery-item:hover{border-color:var(--cyan);}
+.gallery-overlay{position:absolute;bottom:0;left:0;right:0;padding:.8rem 1rem;z-index:2;background:linear-gradient(to top,rgba(0,0,0,.7),transparent);transform:translateY(8px);opacity:0;transition:all .3s;}
+.gallery-item:hover .gallery-overlay{transform:translateY(0);opacity:1;}
+.gallery-tag{color:var(--cyan);font-size:.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;}
+.gallery-item.wide{grid-column:span 2;}
+
+.lightbox{position:fixed;inset:0;background:#000;z-index:9999;display:none;align-items:center;justify-content:center;}
+.lightbox.open{display:flex;}
+.lb-img-wrap{width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;}
+.lb-img-wrap img{max-width:100vw;max-height:100vh;object-fit:contain;}
+.lb-close{position:fixed;top:1.2rem;right:1.5rem;background:rgba(0,0,0,.7);border:1px solid var(--cyan);color:var(--cyan);font-size:1.6rem;width:44px;height:44px;border-radius:50%;cursor:pointer;z-index:10001;display:flex;align-items:center;justify-content:center;}
+.lb-nav{position:fixed;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.6);border:1px solid rgba(0,255,204,.4);color:var(--cyan);font-size:2.5rem;width:54px;height:70px;border-radius:6px;cursor:pointer;z-index:10001;display:flex;align-items:center;justify-content:center;}
+.lb-prev{left:.8rem;}.lb-next{right:.8rem;}
+.lb-caption{position:fixed;bottom:1.2rem;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.8);border:1px solid rgba(0,255,204,.2);color:var(--cyan);padding:8px 20px;border-radius:20px;font-size:.85rem;font-weight:700;letter-spacing:2px;z-index:10001;}
+
+footer{background:#080808;border-top:1px solid rgba(0,255,204,.15);padding:3rem 2rem;}
+.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;margin-bottom:2rem;}
+.footer-brand p{color:var(--muted);font-size:.85rem;line-height:1.6;}
+.footer-col h4{color:var(--cyan);font-size:.8rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:1rem;}
+.footer-col ul{list-style:none;}
+.footer-col ul li{margin-bottom:.5rem;}
+.footer-col ul li a{color:var(--muted);text-decoration:none;font-size:.9rem;transition:color .2s;}
+.footer-col ul li a:hover{color:var(--cyan);}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.05);padding-top:1.5rem;text-align:center;color:var(--muted);font-size:.8rem;}
+
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.87);z-index:2000;display:none;align-items:center;justify-content:center;padding:1rem;}
+.overlay.active{display:flex;}
+.modal{background:var(--card);border:1px solid rgba(0,255,204,.2);border-radius:16px;padding:2rem;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;position:relative;}
+.modal h2{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:3px;color:var(--cyan);margin-bottom:1.5rem;}
+.modal-close{position:absolute;top:1rem;right:1rem;background:transparent;border:none;color:var(--muted);font-size:1.5rem;cursor:pointer;}
+.modal-close:hover{color:var(--cyan);}
+.form-group{margin-bottom:1.2rem;}
+.form-group label{display:block;color:var(--muted);font-size:.82rem;letter-spacing:1px;text-transform:uppercase;margin-bottom:.4rem;}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:#1a1a1a;border:1px solid rgba(0,255,204,.2);color:var(--text);padding:10px 14px;border-radius:6px;font-family:'Rajdhani',sans-serif;font-size:1rem;outline:none;transition:border-color .2s;}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--cyan);}
+.form-group select option{background:#1a1a1a;}
+.tabs{display:flex;gap:.5rem;margin-bottom:1.5rem;}
+.tab-btn{flex:1;background:transparent;border:1px solid rgba(0,255,204,.2);color:var(--muted);padding:10px;border-radius:6px;cursor:pointer;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:.85rem;letter-spacing:1px;transition:all .2s;text-transform:uppercase;}
+.tab-btn.active{background:var(--cyan);color:#000;border-color:var(--cyan);}
+.cart-item{display:flex;gap:1rem;align-items:center;padding:1rem 0;border-bottom:1px solid rgba(255,255,255,.05);}
+.cart-item-icon{font-size:2rem;width:50px;text-align:center;}
+.cart-item-info{flex:1;}
+.cart-item-name{font-weight:700;font-size:.95rem;}
+.cart-item-price{color:var(--cyan);font-family:'Bebas Neue',sans-serif;font-size:1.3rem;}
+.cart-item-remove{background:transparent;border:none;color:#ff3366;cursor:pointer;font-size:1.2rem;}
+.cart-total{display:flex;justify-content:space-between;align-items:center;padding:1rem 0;}
+.cart-total-label{font-size:1rem;color:var(--muted);font-weight:700;letter-spacing:1px;}
+.cart-total-val{color:var(--cyan);font-family:'Bebas Neue',sans-serif;font-size:2rem;}
+.payment-methods{display:flex;flex-direction:column;gap:.75rem;margin-bottom:1.5rem;}
+.pay-option{border:1px solid rgba(0,255,204,.2);border-radius:8px;padding:1rem 1.2rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:1rem;}
+.pay-option:hover,.pay-option.selected{border-color:var(--cyan);background:rgba(0,255,204,.05);}
+.pay-icon{font-size:1.5rem;width:36px;text-align:center;}
+.pay-label{font-weight:700;font-size:1rem;}
+.pay-sub{color:var(--muted);font-size:.8rem;}
+.pay-radio{margin-left:auto;width:18px;height:18px;accent-color:var(--cyan);}
+.bank-info{background:#1a1a1a;border:1px solid rgba(0,255,204,.15);border-radius:8px;padding:1.2rem;margin-bottom:1.5rem;}
+.bank-info p{color:var(--muted);font-size:.85rem;margin-bottom:.4rem;}
+.bank-info strong{color:var(--cyan);}
+.order-confirm{text-align:center;padding:1rem 0;}
+.order-confirm .order-num{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--cyan);letter-spacing:4px;margin:1rem 0;}
+.divider{height:1px;background:rgba(0,255,204,.1);margin:1.5rem 0;}
+.float-cart{position:fixed;bottom:2rem;right:2rem;background:var(--cyan);color:#000;border:none;width:56px;height:56px;border-radius:50%;font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,255,204,.3);z-index:999;transition:transform .2s;}
+.float-cart:hover{transform:scale(1.1);}
+.float-cart-count{position:absolute;top:-4px;right:-4px;background:#ff3366;color:#fff;font-size:.7rem;font-weight:700;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.toast{position:fixed;top:80px;right:2rem;z-index:3000;background:var(--card);border:1px solid var(--cyan);color:var(--text);padding:12px 20px;border-radius:8px;font-weight:600;letter-spacing:1px;transform:translateX(130%);transition:transform .3s;}
+.toast.show{transform:translateX(0);}
+
+/* ADMIN */
+#admin-panel{display:none;position:fixed;inset:0;background:#0a0a0a;z-index:8000;overflow-y:auto;}
+.admin-nav{background:#080808;border-bottom:2px solid var(--cyan);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;}
+.admin-nav h1{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--cyan);letter-spacing:3px;}
+.admin-nav-right{display:flex;gap:1rem;align-items:center;}
+.admin-badge{background:rgba(0,255,204,.1);border:1px solid var(--cyan);color:var(--cyan);padding:4px 12px;border-radius:20px;font-size:.75rem;font-weight:700;letter-spacing:2px;}
+.btn-admin{padding:8px 18px;border-radius:4px;cursor:pointer;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.85rem;letter-spacing:1px;text-transform:uppercase;transition:all .2s;border:1px solid var(--cyan);color:var(--cyan);background:transparent;}
+.btn-admin:hover{background:var(--cyan);color:#000;}
+.btn-admin.danger{border-color:#ff4466;color:#ff4466;}
+.btn-admin.danger:hover{background:#ff4466;color:#fff;}
+.btn-admin.success{background:var(--cyan);color:#000;}
+.admin-body{padding:2rem;max-width:1100px;margin:0 auto;}
+.admin-tabs{display:flex;gap:.5rem;margin-bottom:2rem;flex-wrap:wrap;}
+.admin-tab{padding:10px 20px;border-radius:6px;cursor:pointer;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.9rem;letter-spacing:1px;text-transform:uppercase;border:1px solid rgba(0,255,204,.2);color:var(--muted);background:transparent;transition:all .2s;}
+.admin-tab.active{background:var(--cyan);color:#000;border-color:var(--cyan);}
+.admin-section{display:none;}
+.admin-section.active{display:block;}
+.admin-toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;}
+.admin-table{width:100%;border-collapse:collapse;}
+.admin-table th{text-align:left;padding:12px 16px;background:#151515;color:var(--cyan);font-size:.78rem;letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid rgba(0,255,204,.15);}
+.admin-table td{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.04);font-size:.92rem;vertical-align:middle;}
+.admin-table tr:hover td{background:rgba(0,255,204,.02);}
+.badge-active{background:rgba(0,255,204,.1);color:var(--cyan);padding:3px 10px;border-radius:20px;font-size:.75rem;font-weight:700;}
+.badge-inactive{background:rgba(255,68,102,.1);color:#ff4466;padding:3px 10px;border-radius:20px;font-size:.75rem;font-weight:700;}
+.badge-cat{background:rgba(0,255,204,.08);color:var(--cyan);padding:3px 8px;border-radius:4px;font-size:.75rem;letter-spacing:1px;text-transform:uppercase;}
+.action-btns{display:flex;gap:.4rem;}
+.btn-edit{background:transparent;border:1px solid rgba(0,255,204,.3);color:var(--cyan);padding:5px 12px;border-radius:4px;cursor:pointer;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.78rem;transition:all .2s;}
+.btn-edit:hover{background:var(--cyan);color:#000;}
+.btn-del{background:transparent;border:1px solid rgba(255,68,102,.3);color:#ff4466;padding:5px 12px;border-radius:4px;cursor:pointer;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.78rem;transition:all .2s;}
+.btn-del:hover{background:#ff4466;color:#fff;}
+.btn-toggle{background:transparent;border:1px solid rgba(255,204,0,.3);color:#ffcc00;padding:5px 12px;border-radius:4px;cursor:pointer;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.78rem;transition:all .2s;}
+.btn-toggle:hover{background:#ffcc00;color:#000;}
+.admin-form{background:#111;border:1px solid rgba(0,255,204,.15);border-radius:12px;padding:2rem;margin-bottom:2rem;}
+.admin-form h3{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:3px;color:var(--cyan);margin-bottom:1.5rem;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+@media(max-width:600px){.form-row{grid-template-columns:1fr;}}
+.admin-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;margin-bottom:2rem;}
+.stat-card{background:#111;border:1px solid rgba(0,255,204,.12);border-radius:10px;padding:1.2rem;text-align:center;}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--cyan);letter-spacing:2px;}
+.stat-label{color:var(--muted);font-size:.78rem;letter-spacing:2px;text-transform:uppercase;}
+#admin-login{position:fixed;inset:0;background:#0a0a0a;z-index:9000;display:none;align-items:center;justify-content:center;}
+#admin-login.active{display:flex;}
+.admin-login-box{background:#111;border:1px solid rgba(0,255,204,.2);border-radius:16px;padding:2.5rem;width:100%;max-width:380px;text-align:center;}
+.admin-login-box h2{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--cyan);letter-spacing:4px;margin-bottom:.3rem;}
+.admin-login-box p{color:var(--muted);font-size:.85rem;margin-bottom:2rem;}
+.admin-error{color:#ff4466;font-size:.85rem;margin-top:.8rem;display:none;}
+
+@media(max-width:600px){
+  .nav-links{display:none;}
+  .hero-title{font-size:3.5rem;}
+  .hero{height:auto;padding:3rem 1.5rem;min-height:360px;}
+  .section{padding:2rem 1rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN ADMIN -->
+<div id="admin-login">
+  <div class="admin-login-box">
+    <h2>TOPSPOT ADMIN</h2>
+    <p>Acceso exclusivo para administradores</p>
+    <div class="form-group"><label>Usuario</label><input type="text" id="admin-user" placeholder="admin"></div>
+    <div class="form-group"><label>Contraseña</label><input type="password" id="admin-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doAdminLogin()"></div>
+    <button class="btn-primary" style="width:100%;margin-top:.5rem" onclick="doAdminLogin()">ENTRAR AL PANEL</button>
+    <div class="admin-error" id="admin-error">❌ Usuario o contraseña incorrectos</div>
+    <p style="margin-top:1.5rem"><a href="#" onclick="hideAdminLogin()" style="color:var(--muted);font-size:.85rem;text-decoration:none">← Volver a la tienda</a></p>
+  </div>
+</div>
+
+<!-- PANEL ADMIN -->
+<div id="admin-panel">
+  <div class="admin-nav">
+    <h1>⚡ TOPSPOT ADMIN</h1>
+    <div class="admin-nav-right">
+      <span class="admin-badge">ADMINISTRADOR</span>
+      <button class="btn-admin" onclick="closeAdmin()">← VER TIENDA</button>
+      <button class="btn-admin danger" onclick="logoutAdmin()">CERRAR SESIÓN</button>
+    </div>
+  </div>
+  <div class="admin-body">
+    <div class="admin-stats">
+      <div class="stat-card"><div class="stat-num" id="stat-total">0</div><div class="stat-label">Total</div></div>
+      <div class="stat-card"><div class="stat-num" id="stat-tablas">0</div><div class="stat-label">Tablas</div></div>
+      <div class="stat-card"><div class="stat-num" id="stat-trucks">0</div><div class="stat-label">Trucks</div></div>
+      <div class="stat-card"><div class="stat-num" id="stat-ruedas">0</div><div class="stat-label">Ruedas</div></div>
+      <div class="stat-card"><div class="stat-num" id="stat-ropa">0</div><div class="stat-label">Ropa</div></div>
+      <div class="stat-card"><div class="stat-num" id="stat-accesorios">0</div><div class="stat-label">Accesorios</div></div>
+    </div>
+    <div class="admin-tabs">
+      <button class="admin-tab active" onclick="showAdminTab(event,'tab-productos')">📦 Productos</button>
+      <button class="admin-tab" onclick="showAdminTab(event,'tab-nuevo')">➕ Agregar</button>
+      <button class="admin-tab" onclick="showAdminTab(event,'tab-config')">⚙️ Config</button>
+    </div>
+
+    <!-- LISTA PRODUCTOS -->
+    <div id="tab-productos" class="admin-section active">
+      <div class="admin-toolbar">
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <button class="btn-admin" onclick="filterAdmin('todos')" id="fa-todos" style="background:var(--cyan);color:#000">Todos</button>
+          <button class="btn-admin" onclick="filterAdmin('tablas')" id="fa-tablas">Tablas</button>
+          <button class="btn-admin" onclick="filterAdmin('trucks')" id="fa-trucks">Trucks</button>
+          <button class="btn-admin" onclick="filterAdmin('ruedas')" id="fa-ruedas">Ruedas</button>
+          <button class="btn-admin" onclick="filterAdmin('ropa')" id="fa-ropa">Ropa</button>
+          <button class="btn-admin" onclick="filterAdmin('accesorios')" id="fa-accesorios">Accesorios</button>
+        </div>
+        <button class="btn-admin success" onclick="abrirFormNuevo()">+ NUEVO</button>
+      </div>
+      <div style="overflow-x:auto">
+        <table class="admin-table">
+          <thead><tr><th>Producto</th><th>Categoría</th><th>Precio</th><th>Estado</th><th>Acciones</th></tr></thead>
+          <tbody id="admin-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- FORMULARIO -->
+    <div id="tab-nuevo" class="admin-section">
+      <div class="admin-form">
+        <h3 id="form-title">AGREGAR PRODUCTO</h3>
+        <input type="hidden" id="edit-id">
+        <div class="form-row">
+          <div class="form-group"><label>Nombre *</label><input type="text" id="f-nombre" placeholder="Ej: Trucks Thunder 149"></div>
+          <div class="form-group"><label>Categoría *</label>
+            <select id="f-categoria">
+              <option value="">Selecciona...</option>
+              <option value="tablas">🛹 Tablas</option>
+              <option value="trucks">⚙️ Trucks</option>
+              <option value="ruedas">⭕ Ruedas</option>
+              <option value="ropa">👕 Ropa</option>
+              <option value="accesorios">🔩 Accesorios</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Precio *</label><input type="number" id="f-precio" placeholder="650"></div>
+          <div class="form-group"><label>Precio anterior (tachado)</label><input type="number" id="f-precio-ant" placeholder="800"></div>
+        </div>
+        <div class="form-group"><label>Descripción *</label><textarea id="f-desc" rows="3" placeholder="Describe el producto..."></textarea></div>
+        <div class="form-row">
+          <div class="form-group"><label>Etiqueta</label>
+            <select id="f-etiqueta">
+              <option value="">Sin etiqueta</option>
+              <option value="NUEVO">NUEVO</option>
+              <option value="POPULAR">POPULAR</option>
+              <option value="EXCLUSIVO">EXCLUSIVO</option>
+              <option value="TOP VENTAS">TOP VENTAS</option>
+              <option value="DROP SEMANA">DROP SEMANA</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Tallas (separadas por coma)</label><input type="text" id="f-tallas" placeholder="S, M, L, XL"></div>
+        </div>
+        <div class="form-group"><label>URL de imagen (opcional)</label><input type="text" id="f-imagen" placeholder="https://..."></div>
+        <div class="form-group" style="display:flex;align-items:center;gap:1rem">
+          <label style="margin:0">Activo (visible en tienda)</label>
+          <input type="checkbox" id="f-activo" checked style="width:20px;height:20px;accent-color:var(--cyan)">
+        </div>
+        <div style="display:flex;gap:1rem;margin-top:1.5rem;flex-wrap:wrap">
+          <button class="btn-primary" onclick="saveProduct()">💾 GUARDAR</button>
+          <button class="btn-admin" onclick="resetForm()">✕ CANCELAR</button>
+        </div>
+        <p id="form-msg" style="margin-top:1rem;font-weight:700;display:none"></p>
+      </div>
+    </div>
+
+    <!-- CONFIG -->
+    <div id="tab-config" class="admin-section">
+      <div class="admin-form">
+        <h3>CONFIGURACIÓN</h3>
+        <div class="form-row">
+          <div class="form-group"><label>WhatsApp</label><input type="text" id="cfg-wa" value="5618426883"></div>
+          <div class="form-group"><label>CLABE</label><input type="text" id="cfg-clabe" value="012820004987654321"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Beneficiario</label><input type="text" id="cfg-ben" value="TOPSPOT S.A. DE C.V."></div>
+          <div class="form-group"><label>Banco</label><input type="text" id="cfg-banco" value="BBVA Bancomer"></div>
+        </div>
+        <button class="btn-primary" style="margin-top:1rem" onclick="saveConfig()">💾 GUARDAR CONFIG</button>
+        <p id="cfg-msg" style="margin-top:1rem;font-weight:700;display:none"></p>
+      </div>
+      <div class="admin-form">
+        <h3>CAMBIAR CONTRASEÑA</h3>
+        <div class="form-row">
+          <div class="form-group"><label>Nueva contraseña</label><input type="password" id="new-pass" placeholder="••••••••"></div>
+          <div class="form-group"><label>Confirmar</label><input type="password" id="confirm-pass" placeholder="••••••••"></div>
+        </div>
+        <button class="btn-primary" style="margin-top:1rem" onclick="changePass()">🔒 CAMBIAR</button>
+        <p id="pass-msg" style="margin-top:1rem;font-weight:700;display:none"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TIENDA -->
+<nav>
+  <div class="nav-logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">TOPSPOT</div>
+  <ul class="nav-links">
+    <li><a href="#tablas">Tablas</a></li>
+    <li><a href="#trucks">Trucks</a></li>
+    <li><a href="#ruedas">Ruedas</a></li>
+    <li><a href="#ropa">Ropa</a></li>
+    <li><a href="#accesorios">Accesorios</a></li>
+    <li><a href="#galeria">Galería</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn-login" onclick="openModal('login-modal')">Iniciar Sesión</button>
+    <button class="cart-btn" onclick="openModal('cart-modal')">🛒<span class="cart-count" id="nav-cart-count">0</span></button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg-img"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Nueva Colección 2025</p>
+    <h1 class="hero-title">TOP<span>SPOT</span></h1>
+    <p class="hero-sub">El drop de la semana ya está aquí.</p>
+    <button class="btn-primary" onclick="document.getElementById('tablas').scrollIntoView({behavior:'smooth'})">VER COLECCIÓN</button>
+    <p class="hero-address">📍 <span>Plaza de la Tecnología</span> — Santa Marta, México</p>
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="section-title">CATEGORÍAS RÁPIDAS</h2>
+  <div class="cats-grid">
+    <div class="cat-card" onclick="document.getElementById('tablas').scrollIntoView({behavior:'smooth'})"><div class="cat-icon">🛹</div><div class="cat-label">Tablas</div></div>
+    <div class="cat-card" onclick="document.getElementById('trucks').scrollIntoView({behavior:'smooth'})"><div class="cat-icon">⚙️</div><div class="cat-label">Trucks</div></div>
+    <div class="cat-card" onclick="document.getElementById('ruedas').scrollIntoView({behavior:'smooth'})"><div class="cat-icon">⭕</div><div class="cat-label">Ruedas</div></div>
+    <div class="cat-card" onclick="document.getElementById('ropa').scrollIntoView({behavior:'smooth'})"><div class="cat-icon">👕</div><div class="cat-label">Ropa</div></div>
+    <div class="cat-card" onclick="document.getElementById('accesorios').scrollIntoView({behavior:'smooth'})"><div class="cat-icon">🔩</div><div class="cat-label">Accesorios</div></div>
+    <div class="cat-card" onclick="document.getElementById('galeria').scrollIntoView({behavior:'smooth'})"><div class="cat-icon">📸</div><div class="cat-label">Galería</div></div>
+  </div>
+</section>
+
+<section class="section" id="tablas"><h2 class="section-title">TABLAS</h2><div class="products-grid" id="grid-tablas"></div></section>
+<section class="section" id="trucks" style="background:var(--card2)"><h2 class="section-title">TRUCKS</h2><div class="products-grid" id="grid-trucks"></div></section>
+<section class="section" id="ruedas"><h2 class="section-title">RUEDAS</h2><div class="products-grid" id="grid-ruedas"></div></section>
+<section class="section" id="ropa" style="background:var(--card2)"><h2 class="section-title">ROPA</h2><div class="products-grid" id="grid-ropa"></div></section>
+<section class="section" id="accesorios"><h2 class="section-title">ACCESORIOS</h2><div class="products-grid" id="grid-accesorios"></div></section>
+
+<section class="section" id="galeria" style="background:var(--card2)">
+  <h2 class="section-title">GALERÍA TOPSPOT</h2>
+  <p style="color:var(--muted);margin-bottom:1.8rem;font-size:.95rem;letter-spacing:1px;">Cultura, trucos y comunidad — clic para pantalla completa</p>
+  <div class="gallery-grid">
+    <div class="gallery-item wide" onclick="openLightbox(0)"><img src="https://images.unsplash.com/photo-1547447134-cd3f5c716030?w=900&q=85" loading="lazy"><div class="gallery-overlay"><span class="gallery-tag">Street Skating</span></div></div>
+    <div class="gallery-item" onclick="openLightbox(1)"><img src="https://images.unsplash.com/photo-1516477266575-64a6c89ee56c?w=600&q=85" loading="lazy"><div class="gallery-overlay"><span class="gallery-tag">Skatepark</span></div></div>
+    <div class="gallery-item" onclick="openLightbox(2)"><img src="https://images.unsplash.com/photo-1520045892732-304bc3ac5d8e?w=600&q=85" loading="lazy"><div class="gallery-overlay"><span class="gallery-tag">Tricks</span></div></div>
+    <div class="gallery-item" onclick="openLightbox(3)"><img src="https://images.unsplash.com/photo-1625048535864-c2b5e47bfc34?w=600&q=85" loading="lazy"><div class="gallery-overlay"><span class="gallery-tag">Skater Urbano</span></div></div>
+    <div class="gallery-item" onclick="openLightbox(4)"><img src="https://images.unsplash.com/photo-1565992441121-4367a2a5e5ec?w=600&q=85" loading="lazy"><div class="gallery-overlay"><span class="gallery-tag">Rampa</span></div></div>
+    <div class="gallery-item" onclick="openLightbox(5)"><img src="https://images.unsplash.com/photo-1613475239016-9e59feba3609?w=600&q=85" loading="lazy"><div class="gallery-overlay"><span class="gallery-tag">Deck Collection</span></div></div>
+    <div class="gallery-item" onclick="openLightbox(6)"><img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=85" loading="lazy"><div class="gallery-overlay"><span class="gallery-tag">Bowl</span></div></div>
+    <div class="gallery-item" onclick="openLightbox(7)"><img src="https://images.unsplash.com/photo-1580674684081-7617fbf3d745?w=600&q=85" loading="lazy"><div class="gallery-overlay"><span class="gallery-tag">Comunidad</span></div></div>
+    <div class="gallery-item wide" onclick="openLightbox(8)"><img src="https://images.unsplash.com/photo-1601924483434-5b87cd7e1e7b?w=900&q=85" loading="lazy"><div class="gallery-overlay"><span class="gallery-tag">Skate Culture</span></div></div>
+  </div>
+  <p style="color:var(--muted);margin-top:1.5rem;font-size:.85rem;letter-spacing:1px">📲 Etiqueta tus fotos con <strong style="color:var(--cyan)">#TOPSPOTSantaMarta</strong></p>
+</section>
+
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" onclick="closeLightbox()">✕</button>
+  <button class="lb-nav lb-prev" onclick="lbNav(-1)">&#8249;</button>
+  <div class="lb-img-wrap"><img id="lb-img" src="" alt=""></div>
+  <button class="lb-nav lb-next" onclick="lbNav(1)">&#8250;</button>
+  <div class="lb-caption" id="lb-caption"></div>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo" style="margin-bottom:.5rem">TOPSPOT</div>
+      <p>La tienda de skate más completa de Santa Marta.</p>
+      <p style="margin-top:.8rem;color:var(--cyan)">📍 Plaza de la Tecnología<br>Santa Marta, México</p>
+      <p style="margin-top:1rem"><a href="#" onclick="showAdminLogin()" style="color:rgba(0,255,204,.3);font-size:.75rem;text-decoration:none;letter-spacing:1px">⚙ Admin</a></p>
+    </div>
+    <div class="footer-col"><h4>Productos</h4><ul>
+      <li><a href="#tablas">Tablas</a></li><li><a href="#trucks">Trucks</a></li>
+      <li><a href="#ruedas">Ruedas</a></li><li><a href="#ropa">Ropa</a></li>
+      <li><a href="#accesorios">Accesorios</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Tienda</h4><ul>
+      <li><a href="#">Sobre nosotros</a></li><li><a href="#">Envíos</a></li>
+      <li><a href="#">Devoluciones</a></li><li><a href="#">Contacto</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Pago</h4><p style="color:var(--muted);font-size:.85rem;line-height:2">💵 Efectivo<br>💳 Tarjeta<br>🏦 Transferencia CLABE</p></div>
+  </div>
+  <div class="footer-bottom"><p>© 2025 TOPSPOT Santa Marta — Todos los derechos reservados</p></div>
+</footer>
+
+<button class="float-cart" onclick="openModal('cart-modal')">🛒<span class="float-cart-count" id="float-cart-count">0</span></button>
+<div class="toast" id="toast"></div>
+
+<!-- MODAL LOGIN -->
+<div class="overlay" id="login-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('login-modal')">✕</button>
+    <h2>ACCESO TOPSPOT</h2>
+    <div class="tabs">
+      <button class="tab-btn active" id="tab-login" onclick="switchTab('login')">Iniciar Sesión</button>
+      <button class="tab-btn" id="tab-register" onclick="switchTab('register')">Registrarse</button>
+    </div>
+    <div id="login-form">
+      <div class="form-group"><label>Correo</label><input type="email" placeholder="tu@email.com"></div>
+      <div class="form-group"><label>Contraseña</label><input type="password" placeholder="••••••••"></div>
+      <button class="btn-primary" style="width:100%;margin-top:.5rem" onclick="showToast('✅ Sesión iniciada');closeModal('login-modal')">ENTRAR</button>
+    </div>
+    <div id="register-form" style="display:none">
+      <div class="form-group"><label>Nombre</label><input type="text" placeholder="Juan Pérez"></div>
+      <div class="form-group"><label>Correo</label><input type="email" placeholder="tu@email.com"></div>
+      <div class="form-group"><label>Contraseña</label><input type="password" placeholder="••••••••"></div>
+      <button class="btn-primary" style="width:100%;margin-top:.5rem" onclick="showToast('✅ Cuenta creada');closeModal('login-modal')">CREAR CUENTA</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL CARRITO -->
+<div class="overlay" id="cart-modal">
+  <div class="modal" style="max-width:520px">
+    <button class="modal-close" onclick="closeModal('cart-modal')">✕</button>
+    <h2>TU CARRITO</h2>
+    <div id="cart-items-container"><p style="color:var(--muted);text-align:center;padding:2rem 0">Tu carrito está vacío 🛒</p></div>
+    <div class="divider"></div>
+    <div class="cart-total"><span class="cart-total-label">TOTAL</span><span class="cart-total-val" id="cart-total-display">$0</span></div>
+    <button class="btn-primary" style="width:100%" onclick="openCheckout()">PROCEDER AL PAGO</button>
+  </div>
+</div>
+
+<!-- MODAL CHECKOUT -->
+<div class="overlay" id="checkout-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('checkout-modal')">✕</button>
+    <h2>CHECKOUT</h2>
+    <div id="step-checkout">
+      <div class="form-group"><label>Nombre completo</label><input type="text" id="customer-name" placeholder="Juan Pérez"></div>
+      <div class="form-group"><label>Correo</label><input type="email" id="customer-email" placeholder="tu@email.com"></div>
+      <div class="form-group"><label>Teléfono</label><input type="tel" id="customer-phone" placeholder="3001234567"></div>
+      <div class="form-group"><label>Dirección de entrega</label><input type="text" id="customer-address" placeholder="Calle, Número, Colonia"></div>
+      <div class="divider"></div>
+      <p style="color:var(--cyan);font-weight:700;letter-spacing:2px;font-size:.85rem;margin-bottom:1rem;text-transform:uppercase">Método de Pago</p>
+      <div class="payment-methods">
+        <div class="pay-option selected" onclick="selectPay(this,'cash')"><div class="pay-icon">💵</div><div><div class="pay-label">Efectivo</div><div class="pay-sub">Pago al recibir</div></div><input type="radio" class="pay-radio" name="pay" checked></div>
+        <div class="pay-option" onclick="selectPay(this,'card')"><div class="pay-icon">💳</div><div><div class="pay-label">Tarjeta</div><div class="pay-sub">Débito o crédito</div></div><input type="radio" class="pay-radio" name="pay"></div>
+        <div class="pay-option" onclick="selectPay(this,'transfer')"><div class="pay-icon">🏦</div><div><div class="pay-label">Transferencia CLABE</div><div class="pay-sub">Transferencia bancaria</div></div><input type="radio" class="pay-radio" name="pay"></div>
+      </div>
+      <div id="card-fields" style="display:none">
+        <div class="form-group"><label>Número de tarjeta</label><input type="text" placeholder="1234 5678 9012 3456" maxlength="19"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+          <div class="form-group"><label>Vencimiento</label><input type="text" placeholder="MM/AA" maxlength="5"></div>
+          <div class="form-group"><label>CVV</label><input type="text" placeholder="123" maxlength="3"></div>
+        </div>
+      </div>
+      <div id="transfer-info" style="display:none">
+        <div class="bank-info">
+          <p>🏦 <strong>Banco:</strong> <span id="pay-banco">BBVA Bancomer</span></p>
+          <p>👤 <strong>Beneficiario:</strong> <span id="pay-ben">TOPSPOT S.A. DE C.V.</span></p>
+          <p>🔢 <strong>CLABE:</strong> <strong id="pay-clabe">012820004987654321</strong></p>
+        </div>
+      </div>
+      <div class="cart-total"><span class="cart-total-label">TOTAL</span><span class="cart-total-val" id="checkout-total">$0</span></div>
+      <button class="btn-primary" style="width:100%" onclick="placeOrder()">CONFIRMAR ORDEN</button>
+    </div>
+    <div id="step-confirm" style="display:none" class="order-confirm">
+      <div style="font-size:4rem">✅</div>
+      <h3 style="font-size:1.1rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-top:.5rem">¡PEDIDO CONFIRMADO!</h3>
+      <div class="order-num" id="order-number">#TOPSPOT-00000</div>
+      <p style="color:var(--muted);font-size:.95rem;line-height:1.8" id="order-summary-text"></p>
+      <div class="divider"></div>
+      <a id="wa-btn" href="#" target="_blank" style="display:block;background:#25D366;color:#fff;text-align:center;padding:14px;border-radius:8px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;letter-spacing:2px;text-decoration:none;margin:1.2rem 0">📲 ENVIAR PEDIDO POR WHATSAPP</a>
+      <button class="btn-primary" style="width:100%;background:transparent;border:1px solid var(--cyan);color:var(--cyan)" onclick="newOrder()">SEGUIR COMPRANDO</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══ PRODUCTOS ══
+var productos = [
+  {id:1,nombre:'Tabla SK8 Classic 8.0"',cat:'tablas',precio:850,ant:null,desc:'Maple canadiense 7 capas, shape clásico. Perfecta para principiantes e intermedios.',etiq:'POPULAR',tallas:null,img:null,activo:true},
+  {id:2,nombre:'Tabla Street King 8.25"',cat:'tablas',precio:980,ant:null,desc:'Diseño urbano agresivo, refuerzo en nose y tail. Ideal para street skating.',etiq:null,tallas:null,img:null,activo:true},
+  {id:3,nombre:'Tabla Cruiser Longboard 32"',cat:'tablas',precio:1100,ant:1350,desc:'Perfecta para desplazarte por la ciudad. Estable, cómoda y elegante.',etiq:null,tallas:null,img:null,activo:true},
+  {id:4,nombre:'Tabla Park Pro 8.5"',cat:'tablas',precio:1050,ant:null,desc:'Diseñada para rampas y park. Concave profundo, respuesta rápida.',etiq:'NUEVO',tallas:null,img:null,activo:true},
+  {id:5,nombre:'Trucks Thunder 149',cat:'trucks',precio:650,ant:null,desc:'Aluminio de alta resistencia. Par de trucks 149mm. Ideales para cualquier disciplina.',etiq:'TOP VENTAS',tallas:null,img:null,activo:true},
+  {id:6,nombre:'Trucks Independent 139',cat:'trucks',precio:720,ant:null,desc:'Marca clásica del skate. Precisión de giro inigualable. Par 139mm titanio.',etiq:null,tallas:null,img:null,activo:true},
+  {id:7,nombre:'Trucks Venture 5.6',cat:'trucks',precio:590,ant:null,desc:'Ligeros y resistentes. Excelente para street. Incluye tuercas de acero inoxidable.',etiq:null,tallas:null,img:null,activo:true},
+  {id:8,nombre:'Trucks Krux K5 DLK',cat:'trucks',precio:780,ant:null,desc:'Trucks premium de aleación ligera. Giro suave y respuesta precisa.',etiq:'NUEVO',tallas:null,img:null,activo:true},
+  {id:9,nombre:'Ruedas Spitfire 52mm',cat:'ruedas',precio:320,ant:null,desc:'Poliuretano de alta calidad. 52mm, dureza 99A. Perfectas para street.',etiq:'POPULAR',tallas:null,img:null,activo:true},
+  {id:10,nombre:'Ruedas Bones STF 54mm',cat:'ruedas',precio:380,ant:null,desc:'Street Tech Formula. Rápidas en cualquier superficie. Pack x4.',etiq:null,tallas:null,img:null,activo:true},
+  {id:11,nombre:'Ruedas OJ Super Juice 60mm',cat:'ruedas',precio:420,ant:null,desc:'60mm 78A. Suaves y veloces para cruising. Excelente absorción de vibraciones.',etiq:null,tallas:null,img:null,activo:true},
+  {id:12,nombre:'Hoodie Topspot Impact',cat:'ropa',precio:450,ant:null,desc:'Algodón 100%, estampado reflectante. Colores: negro, gris, verde.',etiq:'NUEVO',tallas:'S,M,L,XL',img:null,activo:true},
+  {id:13,nombre:'Gorra Topspot Snapback',cat:'ropa',precio:220,ant:null,desc:'5 paneles. Logo bordado. Ajuste snapback. Edición limitada.',etiq:null,tallas:'Única,S/M,L/XL',img:null,activo:true},
+  {id:14,nombre:'Tenis Topspot Hi Vulc',cat:'ropa',precio:890,ant:1100,desc:'Suela vulcanizada, refuerzo en talón. Tallas 38-46.',etiq:null,tallas:'38,39,40,41,42,43,44,45,46',img:null,activo:true},
+  {id:15,nombre:'Pantalón Cargo Topspot',cat:'ropa',precio:480,ant:null,desc:'Tela resistente, bolsillos laterales con cierre. Tallas 28-36.',etiq:null,tallas:'28,30,32,34,36',img:null,activo:true},
+  {id:16,nombre:'Grip Tape Topspot Pro',cat:'accesorios',precio:85,ant:null,desc:'Lija premium negra full sheet. Alta adherencia. 23x84cm.',etiq:null,tallas:null,img:null,activo:true},
+  {id:17,nombre:'Casco Topspot Protect',cat:'accesorios',precio:380,ant:null,desc:'ABS + EPS interior. Certificación CE. Ventilación 14 canales.',etiq:null,tallas:null,img:null,activo:true},
+  {id:18,nombre:'Kit Protecciones Completo',cat:'accesorios',precio:290,ant:null,desc:'Rodilleras, coderas y muñequeras. Material EVA. Tallas XS-XL.',etiq:null,tallas:null,img:null,activo:true},
+  {id:19,nombre:'Herramienta Skate T-Tool',cat:'accesorios',precio:95,ant:null,desc:'Todo en uno: llave Allen 1/8", llave 3/8" y 1/2". Compacta y resistente.',etiq:null,tallas:null,img:null,activo:true},
+];
+
+var nextId = 20;
+var catIcons = {tablas:'🛹',trucks:'⚙️',ruedas:'⭕',ropa:'👕',accesorios:'🔩'};
+var ADMIN_USER='admin', ADMIN_PASS='topspot2025';
+var adminLoggedIn=false, editingId=null, currentFilter='todos';
+var cart=[], selectedPayment='cash';
+var appConfig={whatsapp:'5618426883',clabe:'012820004987654321',ben:'TOPSPOT S.A. DE C.V.',banco:'BBVA Bancomer'};
+
+// ── RENDER GRIDS ──
+function renderAll(){
+  ['tablas','trucks','ruedas','ropa','accesorios'].forEach(function(cat){
+    renderGrid(cat, productos.filter(function(p){return p.cat===cat&&p.activo;}));
+  });
+}
+
+function renderGrid(cat, prods){
+  var grid=document.getElementById('grid-'+cat);
+  if(!grid)return;
+  if(!prods.length){grid.innerHTML='<p style="color:var(--muted)">No hay productos en esta categoría.</p>';return;}
+  grid.innerHTML=prods.map(function(p){
+    var ic=catIcons[p.cat]||'🛹';
+    var badge=p.etiq?'<div class="product-badge">'+p.etiq+'</div>':'';
+    var imgH=p.img?'<img src="'+p.img+'" onerror="this.style.display=\'none\'">':'<span style="font-size:5rem">'+ic+'</span>';
+    var priceH=p.ant
+      ?'<span class="product-price">$'+p.precio.toLocaleString()+'</span><span class="product-old">$'+p.ant.toLocaleString()+'</span>'
+      :'<span class="product-price">$'+p.precio.toLocaleString()+'</span>';
+    var sn=p.nombre.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+    if(p.tallas&&p.tallas.trim()){
+      var sid='sz-'+p.id,eid='er-'+p.id;
+      var btns=p.tallas.split(',').map(function(t){return'<button class="size-opt" onclick="selectSize(this,\''+sid+'\')">'+t.trim()+'</button>';}).join('');
+      return'<div class="product-card"><div class="product-img">'+imgH+badge+'</div>'
+        +'<div class="product-info"><div class="product-name">'+p.nombre+'</div>'
+        +'<div class="product-desc">'+p.desc+'</div>'
+        +'<div style="display:flex;align-items:baseline;gap:4px">'+priceH+'</div>'
+        +'<div class="size-selector"><label>Talla</label><div class="sizes" id="'+sid+'">'+btns+'</div>'
+        +'<div class="size-error" id="'+eid+'">⚠️ Elige una talla</div></div>'
+        +'<button class="btn-add" onclick="addToCartWithSize(\''+sn+'\','+p.precio+',\''+ic+'\',\''+sid+'\',\''+eid+'\')">+ AGREGAR AL CARRITO</button>'
+        +'</div></div>';
+    }
+    return'<div class="product-card"><div class="product-img">'+imgH+badge+'</div>'
+      +'<div class="product-info"><div class="product-name">'+p.nombre+'</div>'
+      +'<div class="product-desc">'+p.desc+'</div>'
+      +'<div style="display:flex;align-items:baseline;gap:4px">'+priceH+'</div>'
+      +'<button class="btn-add" onclick="addToCart(\''+sn+'\','+p.precio+',\''+ic+'\')">+ AGREGAR AL CARRITO</button>'
+      +'</div></div>';
+  }).join('');
+}
+
+// ── ADMIN ──
+function showAdminLogin(){document.getElementById('admin-login').classList.add('active');}
+function hideAdminLogin(){document.getElementById('admin-login').classList.remove('active');}
+function doAdminLogin(){
+  var u=document.getElementById('admin-user').value.trim();
+  var pw=document.getElementById('admin-pass').value;
+  if(u===ADMIN_USER&&pw===ADMIN_PASS){
+    adminLoggedIn=true;hideAdminLogin();
+    document.getElementById('admin-panel').style.display='block';
+    document.body.style.overflow='hidden';
+    loadAdminTable();
+  }else{
+    var e=document.getElementById('admin-error');e.style.display='block';
+    setTimeout(function(){e.style.display='none';},3000);
+  }
+}
+function closeAdmin(){document.getElementById('admin-panel').style.display='none';document.body.style.overflow='';renderAll();}
+function logoutAdmin(){adminLoggedIn=false;closeAdmin();}
+
+function showAdminTab(e,tabId){
+  document.querySelectorAll('.admin-section').forEach(function(s){s.classList.remove('active');});
+  document.querySelectorAll('.admin-tab').forEach(function(t){t.classList.remove('active');});
+  document.getElementById(tabId).classList.add('active');
+  if(e&&e.target)e.target.classList.add('active');
+}
+function abrirFormNuevo(){
+  resetForm();
+  document.querySelectorAll('.admin-section').forEach(function(s){s.classList.remove('active');});
+  document.querySelectorAll('.admin-tab').forEach(function(t){t.classList.remove('active');});
+  document.getElementById('tab-nuevo').classList.add('active');
+  document.querySelectorAll('.admin-tab')[1].classList.add('active');
+}
+
+function filterAdmin(cat){
+  currentFilter=cat;
+  document.querySelectorAll('[id^="fa-"]').forEach(function(b){b.style.background='transparent';b.style.color='var(--cyan)';});
+  var fb=document.getElementById('fa-'+cat);if(fb){fb.style.background='var(--cyan)';fb.style.color='#000';}
+  loadAdminTable();
+}
+
+function loadAdminTable(){
+  var filtered=currentFilter==='todos'?productos:productos.filter(function(p){return p.cat===currentFilter;});
+  var tbody=document.getElementById('admin-tbody');
+  // Stats
+  document.getElementById('stat-total').textContent=productos.length;
+  ['tablas','trucks','ruedas','ropa','accesorios'].forEach(function(c){
+    var el=document.getElementById('stat-'+c);
+    if(el)el.textContent=productos.filter(function(p){return p.cat===c;}).length;
+  });
+  if(!filtered.length){tbody.innerHTML='<tr><td colspan="5" style="text-align:center;padding:2rem;color:var(--muted)">Sin productos</td></tr>';return;}
+  tbody.innerHTML=filtered.map(function(p){
+    var sb=p.activo?'<span class="badge-active">Activo</span>':'<span class="badge-inactive">Inactivo</span>';
+    return'<tr><td><strong>'+p.nombre+'</strong></td>'
+      +'<td><span class="badge-cat">'+p.cat+'</span></td>'
+      +'<td>$'+p.precio.toLocaleString()+'</td>'
+      +'<td>'+sb+'</td>'
+      +'<td><div class="action-btns">'
+      +'<button class="btn-edit" onclick="editProduct('+p.id+')">✏️ Editar</button>'
+      +'<button class="btn-toggle" onclick="toggleProduct('+p.id+')">'+(p.activo?'🔴 Desactivar':'🟢 Activar')+'</button>'
+      +'<button class="btn-del" onclick="deleteProduct('+p.id+')">🗑 Eliminar</button>'
+      +'</div></td></tr>';
+  }).join('');
+}
+
+function editProduct(id){
+  var p=productos.find(function(x){return x.id===id;});if(!p)return;
+  editingId=id;
+  document.getElementById('edit-id').value=id;
+  document.getElementById('f-nombre').value=p.nombre;
+  document.getElementById('f-categoria').value=p.cat;
+  document.getElementById('f-precio').value=p.precio;
+  document.getElementById('f-precio-ant').value=p.ant||'';
+  document.getElementById('f-desc').value=p.desc;
+  document.getElementById('f-etiqueta').value=p.etiq||'';
+  document.getElementById('f-tallas').value=p.tallas||'';
+  document.getElementById('f-imagen').value=p.img||'';
+  document.getElementById('f-activo').checked=p.activo;
+  document.getElementById('form-title').textContent='EDITANDO: '+p.nombre.toUpperCase();
+  // Switch to form tab
+  document.querySelectorAll('.admin-section').forEach(function(s){s.classList.remove('active');});
+  document.querySelectorAll('.admin-tab').forEach(function(t){t.classList.remove('active');});
+  document.getElementById('tab-nuevo').classList.add('active');
+  document.querySelectorAll('.admin-tab')[1].classList.add('active');
+}
+
+function saveProduct(){
+  var nombre=document.getElementById('f-nombre').value.trim();
+  var cat=document.getElementById('f-categoria').value;
+  var precio=parseInt(document.getElementById('f-precio').value);
+  var desc=document.getElementById('f-desc').value.trim();
+  if(!nombre||!cat||!precio||!desc){showFormMsg('⚠️ Completa los campos obligatorios','#ff4466');return;}
+  var payload={
+    nombre:nombre,cat:cat,precio:precio,
+    ant:parseInt(document.getElementById('f-precio-ant').value)||null,
+    desc:desc,
+    etiq:document.getElementById('f-etiqueta').value||null,
+    tallas:document.getElementById('f-tallas').value.trim()||null,
+    img:document.getElementById('f-imagen').value.trim()||null,
+    activo:document.getElementById('f-activo').checked
+  };
+  if(editingId){
+    var idx=productos.findIndex(function(p){return p.id===editingId;});
+    if(idx>=0){payload.id=editingId;productos[idx]=payload;}
+  }else{
+    payload.id=nextId++;
+    productos.push(payload);
+  }
+  showFormMsg('✅ Producto guardado','var(--cyan)');
+  resetForm();
+  loadAdminTable();
+  renderAll();
+}
+
+function toggleProduct(id){
+  var p=productos.find(function(x){return x.id===id;});
+  if(p){p.activo=!p.activo;loadAdminTable();renderAll();}
+}
+
+function deleteProduct(id){
+  if(!confirm('¿Eliminar este producto?'))return;
+  productos=productos.filter(function(p){return p.id!==id;});
+  loadAdminTable();renderAll();showToast('🗑 Producto eliminado');
+}
+
+function resetForm(){
+  editingId=null;
+  ['f-nombre','f-categoria','f-precio','f-precio-ant','f-desc','f-etiqueta','f-tallas','f-imagen'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
+  document.getElementById('f-activo').checked=true;
+  document.getElementById('form-title').textContent='AGREGAR PRODUCTO';
+  document.getElementById('form-msg').style.display='none';
+}
+
+function showFormMsg(msg,color){var el=document.getElementById('form-msg');el.textContent=msg;el.style.color=color;el.style.display='block';setTimeout(function(){el.style.display='none';},4000);}
+
+function saveConfig(){
+  appConfig.whatsapp=document.getElementById('cfg-wa').value.trim();
+  appConfig.clabe=document.getElementById('cfg-clabe').value.trim();
+  appConfig.ben=document.getElementById('cfg-ben').value.trim();
+  appConfig.banco=document.getElementById('cfg-banco').value.trim();
+  var el;
+  el=document.getElementById('pay-clabe');if(el)el.textContent=appConfig.clabe;
+  el=document.getElementById('pay-ben');if(el)el.textContent=appConfig.ben;
+  el=document.getElementById('pay-banco');if(el)el.textContent=appConfig.banco;
+  var msg=document.getElementById('cfg-msg');msg.textContent='✅ Configuración guardada';msg.style.color='var(--cyan)';msg.style.display='block';
+  setTimeout(function(){msg.style.display='none';},3000);
+}
+
+function changePass(){
+  var np=document.getElementById('new-pass').value;
+  var cp=document.getElementById('confirm-pass').value;
+  var msg=document.getElementById('pass-msg');
+  if(!np||np.length<6){msg.textContent='⚠️ Mínimo 6 caracteres';msg.style.color='#ff4466';msg.style.display='block';return;}
+  if(np!==cp){msg.textContent='⚠️ Las contraseñas no coinciden';msg.style.color='#ff4466';msg.style.display='block';return;}
+  ADMIN_PASS=np;msg.textContent='✅ Contraseña cambiada';msg.style.color='var(--cyan)';msg.style.display='block';
+  document.getElementById('new-pass').value='';document.getElementById('confirm-pass').value='';
+  setTimeout(function(){msg.style.display='none';},3000);
+}
+
+// ── CARRITO ──
+function addToCart(name,price,icon){
+  var f=false;
+  for(var i=0;i<cart.length;i++){if(cart[i].name===name){cart[i].qty++;f=true;break;}}
+  if(!f)cart.push({name:name,price:price,icon:icon,qty:1});
+  updateCartUI();showToast('🛹 '+name+' agregado');
+}
+function removeFromCart(name){cart=cart.filter(function(i){return i.name!==name;});updateCartUI();renderCartModal();}
+function updateQty(name,d){
+  for(var i=0;i<cart.length;i++){if(cart[i].name===name){cart[i].qty+=d;if(cart[i].qty<=0)cart.splice(i,1);break;}}
+  updateCartUI();renderCartModal();
+}
+function subtotal(){return cart.reduce(function(s,i){return s+i.price*i.qty;},0);}
+function updateCartUI(){
+  var count=cart.reduce(function(s,i){return s+i.qty;},0);
+  var sub=subtotal();
+  ['nav-cart-count','float-cart-count'].forEach(function(id){var el=document.getElementById(id);if(el)el.textContent=count;});
+  var d1=document.getElementById('cart-total-display'),d2=document.getElementById('checkout-total');
+  if(d1)d1.textContent='$'+sub.toLocaleString();
+  if(d2)d2.textContent='$'+sub.toLocaleString();
+}
+function renderCartModal(){
+  var c=document.getElementById('cart-items-container');if(!c)return;
+  if(!cart.length){c.innerHTML='<p style="color:var(--muted);text-align:center;padding:2rem 0">Tu carrito está vacío 🛒</p>';return;}
+  c.innerHTML=cart.map(function(item){
+    var sn=item.name.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+    return'<div class="cart-item"><div class="cart-item-icon">'+item.icon+'</div>'
+      +'<div class="cart-item-info"><div class="cart-item-name">'+item.name+'</div>'
+      +'<div style="display:flex;align-items:center;gap:8px;margin-top:5px">'
+      +'<button onclick="updateQty(\''+sn+'\',-1)" style="background:rgba(0,255,204,.1);border:1px solid var(--cyan);color:var(--cyan);width:26px;height:26px;border-radius:4px;cursor:pointer;font-weight:700">−</button>'
+      +'<span style="color:#fff;font-weight:700;min-width:18px;text-align:center">'+item.qty+'</span>'
+      +'<button onclick="updateQty(\''+sn+'\',1)" style="background:rgba(0,255,204,.1);border:1px solid var(--cyan);color:var(--cyan);width:26px;height:26px;border-radius:4px;cursor:pointer;font-weight:700">+</button>'
+      +'</div><div class="cart-item-price">$'+(item.price*item.qty).toLocaleString()+'</div></div>'
+      +'<button class="cart-item-remove" onclick="removeFromCart(\''+sn+'\')">✕</button></div>';
+  }).join('');
+}
+function selectSize(btn,gid){document.getElementById(gid).querySelectorAll('.size-opt').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');}
+function addToCartWithSize(name,price,icon,sid,eid){
+  var a=document.getElementById(sid).querySelector('.size-opt.active');
+  if(!a){document.getElementById(eid).style.display='block';setTimeout(function(){document.getElementById(eid).style.display='none';},2500);return;}
+  addToCart(name+' (Talla '+a.textContent+')',price,icon);
+  document.getElementById(sid).querySelectorAll('.size-opt').forEach(function(b){b.classList.remove('active');});
+}
+
+// ── MODALS ──
+function openModal(id){if(id==='cart-modal')renderCartModal();document.getElementById(id).classList.add('active');document.body.style.overflow='hidden';}
+function closeModal(id){document.getElementById(id).classList.remove('active');document.body.style.overflow='';}
+document.querySelectorAll('.overlay').forEach(function(el){el.addEventListener('click',function(e){if(e.target===el)closeModal(el.id);});});
+function switchTab(t){
+  document.getElementById('login-form').style.display=t==='login'?'block':'none';
+  document.getElementById('register-form').style.display=t==='register'?'block':'none';
+  document.getElementById('tab-login').classList.toggle('active',t==='login');
+  document.getElementById('tab-register').classList.toggle('active',t==='register');
+}
+function selectPay(el,method){
+  selectedPayment=method;
+  document.querySelectorAll('.pay-option').forEach(function(o){o.classList.remove('selected');o.querySelector('input').checked=false;});
+  el.classList.add('selected');el.querySelector('input').checked=true;
+  document.getElementById('card-fields').style.display=method==='card'?'block':'none';
+  document.getElementById('transfer-info').style.display=method==='transfer'?'block':'none';
+}
+function openCheckout(){
+  if(!cart.length){showToast('⚠️ Tu carrito está vacío');return;}
+  closeModal('cart-modal');
+  document.getElementById('step-checkout').style.display='block';
+  document.getElementById('step-confirm').style.display='none';
+  updateCartUI();openModal('checkout-modal');
+}
+function placeOrder(){
+  var name=document.getElementById('customer-name').value.trim();
+  var email=document.getElementById('customer-email').value.trim();
+  var phone=document.getElementById('customer-phone').value.trim();
+  var address=document.getElementById('customer-address').value.trim();
+  if(!name){showToast('⚠️ Ingresa tu nombre');return;}
+  if(!email){showToast('⚠️ Ingresa tu correo');return;}
+  if(!phone){showToast('⚠️ Ingresa tu teléfono');return;}
+  if(!address){showToast('⚠️ Ingresa tu dirección');return;}
+  var orderNum='#TOPSPOT-'+Math.random().toString(36).substring(2,7).toUpperCase();
+  var sub=subtotal();
+  var payLabels={cash:'Efectivo 💵',card:'Tarjeta 💳',transfer:'Transferencia CLABE 🏦'};
+  var items=cart.map(function(i){return'  • '+i.icon+' '+i.name+' x'+i.qty+' = $'+(i.price*i.qty).toLocaleString()+' MXN';}).join('\n');
+  var waMsg='🛹 *NUEVO PEDIDO — TOPSPOT* 🛹\n━━━━━━━━━━━━━━━━\n📋 '+orderNum+'\n👤 '+name+'\n📱 '+phone+'\n📧 '+email+'\n📍 '+address+'\n━━━━━━━━━━━━━━━━\n'+items+'\n━━━━━━━━━━━━━━━━\n💰 TOTAL: $'+sub.toLocaleString()+' MXN\n💳 '+payLabels[selectedPayment]+'\n🏪 TOPSPOT — Plaza de la Tecnología, Santa Marta';
+  document.getElementById('wa-btn').href='https://wa.me/'+appConfig.whatsapp+'?text='+encodeURIComponent(waMsg);
+  document.getElementById('order-number').textContent=orderNum;
+  document.getElementById('order-summary-text').innerHTML='<strong style="color:#fff">'+name+'</strong>, tu pedido fue registrado.<br>Total: <strong style="color:var(--cyan)">$'+sub.toLocaleString()+' MXN</strong>';
+  document.getElementById('step-checkout').style.display='none';
+  document.getElementById('step-confirm').style.display='block';
+}
+function newOrder(){cart=[];selectedPayment='cash';updateCartUI();closeModal('checkout-modal');}
+
+// ── GALERÍA ──
+var gallery=[
+  {src:'https://images.unsplash.com/photo-1547447134-cd3f5c716030?w=1600&q=90',cap:'Street Skating'},
+  {src:'https://images.unsplash.com/photo-1516477266575-64a6c89ee56c?w=1600&q=90',cap:'Skatepark'},
+  {src:'https://images.unsplash.com/photo-1520045892732-304bc3ac5d8e?w=1600&q=90',cap:'Tricks'},
+  {src:'https://images.unsplash.com/photo-1625048535864-c2b5e47bfc34?w=1600&q=90',cap:'Skater Urbano'},
+  {src:'https://images.unsplash.com/photo-1565992441121-4367a2a5e5ec?w=1600&q=90',cap:'Rampa'},
+  {src:'https://images.unsplash.com/photo-1613475239016-9e59feba3609?w=1600&q=90',cap:'Deck Collection'},
+  {src:'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1600&q=90',cap:'Bowl'},
+  {src:'https://images.unsplash.com/photo-1580674684081-7617fbf3d745?w=1600&q=90',cap:'Comunidad'},
+  {src:'https://images.unsplash.com/photo-1601924483434-5b87cd7e1e7b?w=1600&q=90',cap:'Skate Culture'}
+];
+var lbIdx=0;
+function openLightbox(idx){lbIdx=idx;document.getElementById('lb-img').src=gallery[idx].src;document.getElementById('lb-caption').textContent=gallery[idx].cap+' · '+(idx+1)+'/'+gallery.length;document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden';}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
+function lbNav(d){lbIdx=(lbIdx+d+gallery.length)%gallery.length;document.getElementById('lb-img').src=gallery[lbIdx].src;document.getElementById('lb-caption').textContent=gallery[lbIdx].cap+' · '+(lbIdx+1)+'/'+gallery.length;}
+document.getElementById('lightbox').addEventListener('click',function(e){if(e.target===this)closeLightbox();});
+document.addEventListener('keydown',function(e){if(!document.getElementById('lightbox').classList.contains('open'))return;if(e.key==='ArrowRight')lbNav(1);if(e.key==='ArrowLeft')lbNav(-1);if(e.key==='Escape')closeLightbox();});
+
+// ── TOAST ──
+function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2800);}
+
+// ── INICIO ──
+renderAll();
+updateCartUI();
+</script>
+</body>
+</html>
